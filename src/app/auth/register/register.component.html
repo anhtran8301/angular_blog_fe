@@ -1,0 +1,67 @@
+<div class="logo text-center">
+</div>
+
+<div class="register-form m-3 p-4">
+  <form #f="ngForm" (ngSubmit)="f.form.valid && register()" novalidate>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- <mat-error class="alert alert-primary">{{status}}</mat-error> -->
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input name="name" #name="ngModel" [(ngModel)]="registerForm.name" matInput placeholder="Name" required
+            minlength="3" maxlength="88">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <mat-error *ngIf="name.hasError('required')">The name is required!</mat-error>
+          <mat-error *ngIf="name.hasError('minlength')">The name must at least 3 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input name="username" #username="ngModel" [(ngModel)]="registerForm.username" matInput placeholder="Username"
+            required>
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-error *ngIf="username.hasError('required')">The username is required!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input name="email" [(ngModel)]="registerForm.email" matInput [formControl]="emailFormValidate"
+            placeholder="Email" required>
+          <mat-icon matSuffix>mail</mat-icon>
+          <mat-error *ngIf="emailFormValidate.hasError('required')">The email is required!</mat-error>
+          <mat-error *ngIf="emailFormValidate.hasError('email')">The email is invalid! Ex: exam@gmail.com</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input name="password" #password="ngModel" [(ngModel)]="registerForm.password" matInput placeholder="Password"
+            [type]="hide ? 'password' : 'text'" required minlength="8" maxlength="16" pattern={{passwordRegex}}>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+          <mat-error *ngIf="password.hasError('required')">The password is required!</mat-error>
+          <mat-error *ngIf="password.hasError('minlength')">Password must be 8-16 characters with no space</mat-error>
+          <mat-error *ngIf="password.hasError('pattern')">
+            Including at least 1 uppercase letter,
+            1 lowercase letter,
+            1 number (0-9),
+            1 non-alpha numeric number</mat-error>
+        </mat-form-field>
+
+        <div class="mt-5">
+          <button type="submit" mat-raised-button color="primary"
+            class="mat-button-toggle-group btn-outline-primary">Register
+            <mat-icon color="accent" matSuffix>add_circle_outline</mat-icon>
+          </button>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+  </form>
+</div>
