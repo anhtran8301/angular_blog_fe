@@ -1,10 +1,22 @@
 <mat-toolbar color="primary">
   <button mat-raised-button routerLink="/">Home</button>
   <span class="example-spacer"></span>
-  <button mat-raised-button color="accent" routerLink="login" class="m-3">
-    Login
-  </button>
-  <button mat-raised-button color="accent" routerLink="register">
-    Register
-  </button>
+  <div *ngIf="!isLogin">
+    <button mat-raised-button color="accent" routerLink="login" class="m-3">
+      Login
+    </button>
+    <button mat-raised-button color="accent" routerLink="register">
+      Register
+    </button>
+  </div>
+
+  <div *ngIf="isLogin">
+    <span>{{name}}</span>
+    <img class="user-avatar" src="{{avatar}}" alt="">
+    <button (click)="logOut()" mat-raised-button color="accent" routerLink="login">
+      Logout
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+
 </mat-toolbar>

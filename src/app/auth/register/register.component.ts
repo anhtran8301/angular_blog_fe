@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { RegisterModel } from 'src/app/models/register.model';
+import { RegisterModel } from 'src/app/models/Register';
 import { AuthService } from 'src/app/service/auth.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 

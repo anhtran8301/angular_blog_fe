@@ -1,27 +1,48 @@
 <div class="login-form m-3 p-4">
-  <form action="">
+  <form class="form-angular" #f="ngForm" (ngSubmit)="f.form.valid && login()" novalidate>
     <div class="row">
       <div class="col-md-6">
+
         <mat-form-field appearance="outline">
           <mat-label>Username/Email</mat-label>
-          <input matInput>
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          <input name="usernameOrEmail" #usernameOrEmail="ngModel" [(ngModel)]="loginForm.usernameOrEmail" matInput placeholder="Username/Email"
+            required>
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-error *ngIf="usernameOrEmail.hasError('required')">The username/email is required!</mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
+          <input name="password" #password="ngModel" [(ngModel)]="loginForm.password" matInput placeholder="Password"
+            [type]="hide ? 'password' : 'text'" required minlength="8" maxlength="16" pattern={{passwordRegex}}>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
+
+          <mat-error *ngIf="password.hasError('required')">The password is required!</mat-error>
+          <mat-error *ngIf="password.hasError('minlength')">Password must be 8-16 characters with no space</mat-error>
+          <mat-error *ngIf="password.hasError('pattern')">
+            Including at least 1 uppercase letter,
+            1 lowercase letter,
+            1 number (0-9),
+            1 non-alpha numeric number</mat-error>
         </mat-form-field>
-        <div>
-          <button mat-raised-button color="primary">Login</button>
+
+        
+        <div class="mt-5">
+          <button type="submit" mat-raised-button color="primary"
+            class="mat-button-toggle-group btn-outline-primary">Login
+            <mat-icon color="accent" matSuffix>login</mat-icon>
+          </button>
         </div>
+
       </div>
+
       <div class="col-md-6">
 
       </div>
+
     </div>
   </form>
 </div>
