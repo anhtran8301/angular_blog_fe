@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <mat-card>
+                <form #f="ngForm" (ngSubmit)="f.form.valid && updateAvatar()" novalidate>
+                    <app-upload-avatar (giveURLtoCreate)="onUpload($event)"></app-upload-avatar>
+                    <button mat-button mat-stroked-button color="accent"
+                        class="mat-button-toggle-group btn-outline-success">Update Avatar</button>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

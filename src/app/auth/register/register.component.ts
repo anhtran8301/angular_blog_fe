@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { RegisterModel } from 'src/app/models/Register';
+import { Register } from 'src/app/models/Register';
 import { AuthService } from 'src/app/service/auth.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 
@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   hide = true;
   // status = ""
   registerForm: any = {};
-  registerModel!: RegisterModel;
+  registerModel!: Register;
 
   emailFormValidate = new FormControl('', [
     Validators.required,
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.registerModel = new RegisterModel(
+    this.registerModel = new Register(
       this.registerForm.name,
       this.registerForm.username,
       this.registerForm.email,

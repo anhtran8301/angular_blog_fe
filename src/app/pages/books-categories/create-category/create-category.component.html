@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <mat-card>
+                <form #f="ngForm" (ngSubmit)="f.form.valid && createBookCategory()" novalidate>
+
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input name="name" #name="ngModel" [(ngModel)]="form.name" matInput placeholder="Name"
+                                required minlength="3" maxlength="88">
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                            <mat-error *ngIf="name.hasError('required')">The name is required!</mat-error>
+                            <mat-error *ngIf="name.hasError('minlength')">The name must at least 3
+                                characters</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Description</mat-label>
+                            <textarea name="description" #description="ngModel" [(ngModel)]="form.description" matInput
+                                placeholder="Description"></textarea>
+                        </mat-form-field>
+
+                    </div>
+
+                    <app-upload-avatar (giveURLtoCreate)="onUpLoad($event)"></app-upload-avatar>
+
+                    <button mat-raised-button color="primary" class="mat-button-toggle-group btn-outline-primary">Add
+                        <mat-icon color="accent" matSuffix>add_circle_outline</mat-icon>
+                    </button>
+                    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { LoginModel } from 'src/app/models/Login';
+import { Login } from 'src/app/models/Login';
 import { AuthService } from 'src/app/service/auth.service';
 import { TokenService } from 'src/app/service/token.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   passwordRegex = "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,16}$";
   hide = true;
   loginForm: any = {};
-  loginModel!: LoginModel
+  loginModel!: Login
 
   constructor(
     private authService: AuthService,
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginModel = new LoginModel(
+    this.loginModel = new Login(
       this.loginForm.usernameOrEmail,
       this.loginForm.password
     )

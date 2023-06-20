@@ -28,8 +28,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { NgConfirmModule } from 'ng-confirm-box';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireModule } from "@angular/fire/compat";
+import { environment } from 'src/environments/environment.prod';
+import { UploadAvatarComponent } from './upload/upload-avatar/upload-avatar.component';
+import { ChangeAvatarComponent } from './auth/change-avatar/change-avatar.component';
+import { AuthInterceptor } from './service/auth.interceptor';
+import { ListCategoriesComponent } from './pages/books-categories/list-categories/list-categories.component';
+import { CreateCategoryComponent } from './pages/books-categories/create-category/create-category.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -38,7 +48,11 @@ import { ToastrModule } from 'ngx-toastr';
     FooterComponent,
     RegisterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    UploadAvatarComponent,
+    ChangeAvatarComponent,
+    ListCategoriesComponent,
+    CreateCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -61,8 +75,13 @@ import { ToastrModule } from 'ngx-toastr';
     MatSnackBarModule,
     ReactiveFormsModule,
     NgToastModule,
+    MatProgressSpinnerModule,
     NgConfirmModule,
     MatDatepickerModule,
+    AngularFireStorageModule,
+    MatButtonModule, 
+    MatDialogModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 5000,
@@ -70,7 +89,9 @@ import { ToastrModule } from 'ngx-toastr';
       preventDuplicates: true,
     })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-export class JwtResponseModel {
+export class JwtResponse {
     public id: string;
     public name: string;
     public avatar: string;
