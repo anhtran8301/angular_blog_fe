@@ -23,11 +23,21 @@ export class AuthService {
     return this.httpClient.post<any>(this.API_REGISTER, registerModel);
   }
 
-  login (loginModel: Login): Observable<JwtResponse> {
+  login(loginModel: Login): Observable<JwtResponse> {
     return this.httpClient.post<JwtResponse>(this.API_LOGIN, loginModel);
   }
 
-  editAvatar(avatarModel: ChangeAvatar): Observable<any>{
+  editAvatar(avatarModel: ChangeAvatar): Observable<any> {
     return this.httpClient.put<any>(this.API_UPDATE_AVATAR, avatarModel)
+  }
+
+  checkRegister = false;
+
+  setCheckRegister(status: boolean) {
+    this.checkRegister = status;
+  }
+
+  getCheckRegister(): boolean {
+    return this.checkRegister;
   }
 }

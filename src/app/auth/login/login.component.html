@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="login-form m-3 p-4">
   <form class="form-angular" #f="ngForm" (ngSubmit)="f.form.valid && login()" novalidate>
     <div class="row">
@@ -5,8 +6,8 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Username/Email</mat-label>
-          <input name="usernameOrEmail" #usernameOrEmail="ngModel" [(ngModel)]="loginForm.usernameOrEmail" matInput placeholder="Username/Email"
-            required>
+          <input name="usernameOrEmail" #usernameOrEmail="ngModel" [(ngModel)]="loginForm.usernameOrEmail" matInput
+            placeholder="Username/Email" required>
           <mat-icon matSuffix>account_circle</mat-icon>
           <mat-error *ngIf="usernameOrEmail.hasError('required')">The username/email is required!</mat-error>
         </mat-form-field>
@@ -29,7 +30,7 @@
             1 non-alpha numeric number</mat-error>
         </mat-form-field>
 
-        
+
         <div class="mt-5">
           <button type="submit" mat-raised-button color="primary"
             class="mat-button-toggle-group btn-outline-primary">Login

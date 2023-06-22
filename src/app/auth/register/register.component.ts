@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Register } from 'src/app/models/Register';
 import { AuthService } from 'src/app/service/auth.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -22,10 +23,10 @@ export class RegisterComponent implements OnInit {
 
   ]);
 
-
   constructor(
     private authService: AuthService,
     private toast: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,17 +42,13 @@ export class RegisterComponent implements OnInit {
     );
     console.log(this.registerForm);
     this.authService.register(this.registerModel).subscribe(data => {
-      console.log(data);
-      this.toast.success(data.message)
-      // this.status = data.message;
-
+      // console.log(data);
+      // this.toast.success(data.message);
+      this.authService.setCheckRegister(true);
+      this.router.navigate(['login']);
     }, errorResponse => {
-      console.log(errorResponse.status);
-
-      // console.log(errorResponse.error);
+      // console.log(errorResponse.status);
       this.toast.error(errorResponse.error.message)
-      // this.status = errorResponse.error.message;
-
     });
 
   }

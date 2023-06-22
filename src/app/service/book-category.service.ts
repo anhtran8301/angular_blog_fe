@@ -16,4 +16,8 @@ export class BookCategoryService {
   create(category: BookCategory): Observable<any> {
     return this.httpClient.post<any>(this.API_BOOK_CATEGORY, category);
   }
+
+  getAll(): Observable<any> {
+    return this.httpClient.get<any>(this.API_BOOK_CATEGORY)
+  }
 }

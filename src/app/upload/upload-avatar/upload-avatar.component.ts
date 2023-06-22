@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-upload-avatar',
@@ -15,7 +16,7 @@ export class UploadAvatarComponent {
   //@Output truyền dữ liệu từ component này sang component khác thông qua EventEmitter
   @Output()
   giveURLtoCreate = new EventEmitter<string>();
-  constructor(private afStorage: AngularFireStorage) {
+  constructor(private afStorage: AngularFireStorage, private toast: ToastrService) {
   }
 
   onFileChanged($event: any) {
@@ -36,7 +37,8 @@ export class UploadAvatarComponent {
       return downloadURL;
     })
       .catch(error => {
-        console.log(`Failed to upload avatar and get link ${error}`);
+        this.toast.error(error)
+        // console.log(`Failed to upload avatar and get link ${error}`);
       })
   }
 }

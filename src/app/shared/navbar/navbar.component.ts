@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { TokenService } from 'src/app/service/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ export class NavbarComponent implements OnInit {
   avatar = '';
   isLogin = false;
 
-  constructor(private tokenService: TokenService) {
+  constructor(private tokenService: TokenService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,7 +24,12 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
+    this.isLogin = false;
     sessionStorage.clear();
-    window.location.reload();
+    this.router.navigate(['login']);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("something change->>", changes)
   }
 }

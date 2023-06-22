@@ -40,6 +40,8 @@ import { AuthInterceptor } from './service/auth.interceptor';
 import { ListCategoriesComponent } from './pages/books-categories/list-categories/list-categories.component';
 import { CreateCategoryComponent } from './pages/books-categories/create-category/create-category.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { UsersPageComponent } from './pages/users-page/users-page.component';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     UploadAvatarComponent,
     ChangeAvatarComponent,
     ListCategoriesComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    UsersPageComponent
   ],
   imports: [
     BrowserModule,

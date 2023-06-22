@@ -6,10 +6,10 @@
   <span class="example-spacer"></span>
 
   <div *ngIf="!isLogin">
-    <button mat-raised-button color="accent" routerLink="login" class="m-3">
+    <button mat-raised-button color="accent" routerLink="/login" class="m-3">
       Login
     </button>
-    <button mat-raised-button color="accent" routerLink="register">
+    <button mat-raised-button color="accent" routerLink="/register">
       Register
     </button>
   </div>
@@ -17,7 +17,7 @@
   <div *ngIf="isLogin">
     <span>{{name}}</span>
     <a routerLink="change-avatar"><img class="user-avatar" src="{{avatar}}" alt=""></a>
-    <button (click)="logOut()" mat-raised-button color="accent" routerLink="login">
+    <button (click)="logOut()" mat-raised-button color="accent" routerLink="/login">
       Logout
       <mat-icon>logout</mat-icon>
     </button>

@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(this.authService.getCheckRegister()) {
+      this.toast.success("Register Successfully!");
+    }
   }
 
   login() {
@@ -35,7 +38,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.password
     )
     this.authService.login(this.loginModel).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       //@ts-ignore
       this.tokenService.setName(data.user.name);
       //@ts-ignore
@@ -45,9 +48,7 @@ export class LoginComponent implements OnInit {
       //@ts-ignore
       this.tokenService.setRole(data.user.roles)
 
-      this.router.navigate(['']).then(() => {
-        window.location.reload();
-      })
+      this.router.navigate(['']);
     }, errorResponse => {
       this.toast.error(errorResponse.error.message, "Login fail !!!")
     })

@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
 import { TokenService } from 'src/app/service/token.service';
+import { BookCategory } from 'src/app/models/BookCategory';
+import { BookCategoryService } from 'src/app/service/book-category.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-list-categories',
@@ -9,23 +13,52 @@ import { TokenService } from 'src/app/service/token.service';
   styleUrls: ['./list-categories.component.scss']
 })
 export class ListCategoriesComponent implements OnInit {
-  isLogin = false;
+  // isLogin = false;
+  isAdmin = false;
+  listBooksCategories: BookCategory[] = [];
+  displayedColumns: string[] = ['id', 'name', 'description', 'image'];
+  dataSource: any;
 
   constructor(
     public dialog: MatDialog,
-    private tokenService: TokenService) { }
+    private tokenService: TokenService,
+    private bookCategoryService: BookCategoryService) { }
 
+  reload(data: any) {
+    this.listBooksCategories = data;
+    this.dataSource = new MatTableDataSource<BookCategory>(this.listBooksCategories);
+    this.dataSource.paginator = this.paginator;
+  }
+
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
   ngOnInit(): void {
     if (this.tokenService.getToken()) {
-      this.isLogin = true;
+      // console.log(this.tokenService.getRole());
+      this.tokenService.getRole().forEach(role => {
+        if (JSON.stringify(role) === JSON.stringify('ROLE_ADMIN')) {
+          // console.log("////////////");
+          this.isAdmin = true;
+        }
+      });
+      
     }
+    this.bookCategoryService.getAll().subscribe(data => {
+      // console.log(data);
+      this.reload(data);
+    })
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(CreateCategoryComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
+      if (result == true || result == undefined) {
+        this.bookCategoryService.getAll().subscribe(data => {
+          this.reload(data);
+          // console.log("reload");
+        })
+      }
     });
   }
 }
