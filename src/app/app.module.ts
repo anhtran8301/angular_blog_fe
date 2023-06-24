@@ -40,7 +40,8 @@ import { AuthInterceptor } from './service/auth.interceptor';
 import { ListCategoriesComponent } from './pages/books-categories/list-categories/list-categories.component';
 import { CreateCategoryComponent } from './pages/books-categories/create-category/create-category.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import { UsersPageComponent } from './pages/users-page/users-page.component';
+import { UsersPageComponent } from './pages/users/users-page/users-page.component';
+import { authGuard } from './guard/auth.guard';
 
 
 @NgModule({
@@ -93,7 +94,8 @@ import { UsersPageComponent } from './pages/users-page/users-page.component';
     })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    
   ],
   bootstrap: [AppComponent]
 })

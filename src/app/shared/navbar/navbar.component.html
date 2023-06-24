@@ -2,7 +2,7 @@
 
   <button class="mr-3" mat-raised-button routerLink="/">Home</button>
 
-  <button *ngIf="isLogin" mat-raised-button routerLink="/categories">Category</button>
+  <button *ngIf="isAdmin" mat-raised-button routerLink="/categories">Category</button>
   <span class="example-spacer"></span>
 
   <div *ngIf="!isLogin">
@@ -16,7 +16,7 @@
 
   <div *ngIf="isLogin">
     <span>{{name}}</span>
-    <a routerLink="change-avatar"><img class="user-avatar" src="{{avatar}}" alt=""></a>
+    <a routerLink="/change-avatar"><img class="user-avatar" src="{{avatar}}"></a>
     <button (click)="logOut()" mat-raised-button color="accent" routerLink="/login">
       Logout
       <mat-icon>logout</mat-icon>

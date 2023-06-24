@@ -3,6 +3,7 @@ import { ChangeAvatar } from 'src/app/models/ChangeAvatar';
 import { AuthService } from 'src/app/service/auth.service';
 import { TokenService } from 'src/app/service/token.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-avatar',
@@ -17,6 +18,7 @@ export class ChangeAvatarComponent {
     private authService: AuthService,
     private tokenService: TokenService,
     private toast: ToastrService,
+    private router: Router
     ) {
   }
 
@@ -30,9 +32,9 @@ export class ChangeAvatarComponent {
     )
     this.authService.editAvatar(this.changeAvatar).subscribe(data => {
       // console.log(data);
-      this.tokenService.setAvatar(this.form.avatar)
-      this.toast.success(data.message)
-
+      this.tokenService.setAvatar(this.form.avatar);
+      this.toast.success(data.message);
+      this.router.navigate(['']);
     })
   }
 

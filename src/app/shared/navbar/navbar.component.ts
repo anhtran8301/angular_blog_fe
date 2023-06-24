@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
   name = '';
   avatar = '';
   isLogin = false;
+  isAdmin = false;
 
   constructor(private tokenService: TokenService, private router: Router) {
   }
@@ -20,6 +21,11 @@ export class NavbarComponent implements OnInit {
       this.name = this.tokenService.getName();
       this.avatar = this.tokenService.getAvatar();
       this.isLogin = true;
+      this.tokenService.getRole().forEach(role => {
+        if (JSON.stringify(role) === JSON.stringify('ROLE_ADMIN')) {
+          this.isAdmin = true;
+        }
+      })
     }
   }
 
