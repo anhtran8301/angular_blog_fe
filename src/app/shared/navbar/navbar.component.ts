@@ -1,6 +1,7 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { TokenService } from 'src/app/service/token.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,10 @@ export class NavbarComponent implements OnInit {
   isLogin = false;
   isAdmin = false;
 
-  constructor(private tokenService: TokenService, private router: Router) {
+  constructor(
+    private tokenService: TokenService,
+    private router: Router,
+    private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -31,7 +35,7 @@ export class NavbarComponent implements OnInit {
 
   logOut() {
     this.isLogin = false;
-    sessionStorage.clear();
+    this.authService.logOut();
     this.router.navigate(['login']);
   }
 

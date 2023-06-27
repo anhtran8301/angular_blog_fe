@@ -16,17 +16,17 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [authGuard],
+    canActivate: [notAuthGuard],
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [authGuard],
+    canActivate: [notAuthGuard],
   },
   {
     path: 'change-avatar',
     component: ChangeAvatarComponent,
-    canActivate: [notAuthGuard]
+    canActivate: [authGuard]
   },
   {
     path: 'categories',

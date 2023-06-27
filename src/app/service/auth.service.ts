@@ -27,6 +27,10 @@ export class AuthService {
     return this.httpClient.post<JwtResponse>(this.API_LOGIN, loginModel);
   }
 
+  logOut() {
+    sessionStorage.clear();
+  }
+
   editAvatar(avatarModel: ChangeAvatar): Observable<any> {
     return this.httpClient.put<any>(this.API_UPDATE_AVATAR, avatarModel)
   }
