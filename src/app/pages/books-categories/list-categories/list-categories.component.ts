@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
 import { TokenService } from 'src/app/service/token.service';
@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./list-categories.component.scss']
 })
 export class ListCategoriesComponent implements OnInit {
+
   // isLogin = false;
   isAdmin = false;
   listBooksCategories: BookCategory[] = [];
@@ -33,17 +34,14 @@ export class ListCategoriesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   ngOnInit(): void {
     if (this.tokenService.getToken()) {
-      // console.log(this.tokenService.getRole());
       this.tokenService.getRole().forEach(role => {
         if (JSON.stringify(role) === JSON.stringify('ROLE_ADMIN')) {
-          // console.log("////////////");
           this.isAdmin = true;
         }
       });
-      
+
     }
     this.bookCategoryService.getAll().subscribe(data => {
-      // console.log(data);
       this.reload(data);
     })
   }
@@ -52,11 +50,9 @@ export class ListCategoriesComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateCategoryComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
       if (result == true || result == undefined) {
         this.bookCategoryService.getAll().subscribe(data => {
           this.reload(data);
-          // console.log("reload");
         })
       }
     });

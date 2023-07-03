@@ -1,26 +1,75 @@
-<mat-toolbar color="primary">
-
-  <button class="mr-3" mat-raised-button routerLink="/">Home</button>
-
-  <button *ngIf="isAdmin" mat-raised-button routerLink="/categories">Category</button>
-  <span class="example-spacer"></span>
-
-  <div *ngIf="!isLogin">
-    <button mat-raised-button color="accent" routerLink="/login" class="m-3">
-      Login
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <img class="logo" src="/assets/icons/bookshop.png" alt="image" alt="">
+    </a>
+    <button (click)="toggleNavbarCollapsing()" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
-    <button mat-raised-button color="accent" routerLink="/register">
-      Register
-    </button>
+    <div [class.collapse]="navbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="isAdmin" routerLink="/categories">Create Book Category</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div *ngFor="let bookCategory of listBooksCategories">
+              <li>
+                <a class="dropdown-item" routerLink="/products/categories/{{bookCategory.id}}"
+                  routerLinkActive="active-link">{{bookCategory.name}}</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+            </div>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex px-3">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+      <div class="cart-area d-n">
+        <a>
+          <div class="total">19.22 <span> 2</span> </div>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <div *ngIf="!isLogin">
+        <button mat-raised-button color="accent" routerLink="/login" class="m-3">
+          Login
+        </button>
+        <button mat-raised-button color="accent" routerLink="/register">
+          Register
+        </button>
+      </div>
+
+      <div class="dropdown mx-5">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false" *ngIf="isLogin">
+          Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-item" *ngIf="isLogin">
+            <span class="text-info">{{name}}</span>
+            <hr class="dropdown-divider" />
+            <a routerLink="/change-avatar"><img class="user-avatar" src="{{avatar}}"></a>
+            <hr class="dropdown-divider" />
+            <button (click)="logOut()" mat-raised-button color="accent" routerLink="/login">
+              Logout
+              <mat-icon>logout</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div *ngIf="isLogin">
-    <span>{{name}}</span>
-    <a routerLink="/change-avatar"><img class="user-avatar" src="{{avatar}}"></a>
-    <button (click)="logOut()" mat-raised-button color="accent" routerLink="/login">
-      Logout
-      <mat-icon>logout</mat-icon>
-    </button>
-  </div>
-
-</mat-toolbar>
+</nav>

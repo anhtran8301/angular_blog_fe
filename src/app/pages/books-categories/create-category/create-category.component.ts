@@ -23,6 +23,7 @@ export class CreateCategoryComponent {
 
   createBookCategory() {
     this.bookCategory = new BookCategory(
+      this.form.id,
       this.form.name,
       this.form.description,
       this.form.image
@@ -30,13 +31,25 @@ export class CreateCategoryComponent {
     if (this.form.image == undefined) {
       this.toast.error("The image value can not blank")
     } else {
-      this.bookCategoryService.create(this.bookCategory).subscribe(data => {
-        console.log(data);
-        this.toast.success("Created Successfully")
-      }, errorResponse => {
-        this.toast.error(errorResponse.error.message)
-      })
+      this.bookCategoryService.create(this.bookCategory).subscribe(
+        {
+          next: () => this.toast.success("Created Successfully"),
+          error: (errorResponse) => this.toast.error(errorResponse.error.message)
+        });
     }
+
+    //-- The old way --
+    
+    // if (this.form.image == undefined) {
+    //   this.toast.error("The image value can not blank")
+    // } else {
+    //   this.bookCategoryService.create(this.bookCategory).subscribe(() => {
+    //     // console.log(data);
+    //     this.toast.success("Created Successfully")
+    //   }, errorResponse => {
+    //     this.toast.error(errorResponse.error.message)
+    //   })
+    // }
 
   }
 }

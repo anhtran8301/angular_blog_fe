@@ -8,11 +8,19 @@ import { ListCategoriesComponent } from './pages/books-categories/list-categorie
 import { UsersPageComponent } from './pages/users/users-page/users-page.component';
 import { authGuard, notAuthGuard } from './guard/auth.guard'
 import { adminGuardGuard } from './guard/admin.guard'
+import { ProductsListComponent } from './pages/products/list-products/list-products.component'
+
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    pathMatch: 'full'
   },
+  // {
+  //   path: '**',
+  //   component: HomeComponent,
+  //   pathMatch: 'full'
+  // },
   {
     path: 'register',
     component: RegisterComponent,
@@ -32,6 +40,18 @@ const routes: Routes = [
     path: 'categories',
     component: ListCategoriesComponent,
     canActivate: [adminGuardGuard]
+  },
+  {
+    path: 'products/categories/:id',
+    component: HomeComponent,
+  },
+  {
+    path: 'products/categories',
+    component: HomeComponent,
+  },
+  {
+    path: 'products',
+    component: HomeComponent,
   },
   {
     path: 'users',

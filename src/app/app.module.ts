@@ -42,6 +42,7 @@ import { CreateCategoryComponent } from './pages/books-categories/create-categor
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { UsersPageComponent } from './pages/users/users-page/users-page.component';
 import { authGuard } from './guard/auth.guard';
+import { ProductsListComponent } from './pages/products/list-products/list-products.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { authGuard } from './guard/auth.guard';
     ChangeAvatarComponent,
     ListCategoriesComponent,
     CreateCategoryComponent,
-    UsersPageComponent
+    UsersPageComponent,
+    ProductsListComponent
   ],
   imports: [
     BrowserModule,

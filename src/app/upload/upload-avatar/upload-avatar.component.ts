@@ -26,7 +26,7 @@ export class UploadAvatarComponent {
   onUpload() {
     this.checkUploadAvatar = true;
     const id = Math.random().toString(36).substring(2); //Tạo ra 1 name riêng cho mỗi DB firebase;
-    console.log('id ---> ', id);
+    // console.log('id ---> ', id);
     this.ref = this.afStorage.ref(id);
     this.ref.put(this.selectedFile).then(snapshot => {
       return snapshot.ref.getDownloadURL(); //Trả về 1 chuỗi siêu văn bản trên firebase.
