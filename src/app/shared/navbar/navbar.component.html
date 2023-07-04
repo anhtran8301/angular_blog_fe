@@ -31,16 +31,16 @@
           </ul>
         </li>
       </ul>
-      <form class="d-flex px-3">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
 
-      <div class="cart-area d-n">
-        <a>
-          <div class="total">19.22 <span> 2</span> </div>
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        </a>
+      <!-- Search Component -->
+      <app-search></app-search>
+
+      <div class="d-flex">
+        <button class="btn btn-outline-dark" type="submit">
+          <i class="bi-cart-fill me-1"></i>
+          Cart
+          <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+        </button>
       </div>
 
       <div *ngIf="!isLogin">

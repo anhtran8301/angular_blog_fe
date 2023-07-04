@@ -11,6 +11,7 @@ import { BookCategory } from 'src/app/models/BookCategory';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
   listBooksCategories: BookCategory[] = [];
   name = '';
   avatar = '';
@@ -30,7 +31,15 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBooksCategories();
-    
+    this.router.events.subscribe(event => {
+      if (event.constructor.name === "NavigationEnd") {
+        this.checkLogin();
+      }
+    })
+   
+  }
+
+  checkLogin(){
     if (this.tokenService.getToken()) {
       this.name = this.tokenService.getName();
       this.avatar = this.tokenService.getAvatar();
@@ -38,6 +47,8 @@ export class NavbarComponent implements OnInit {
       this.tokenService.getRole().forEach(role => {
         if (JSON.stringify(role) === JSON.stringify('ROLE_ADMIN')) {
           this.isAdmin = true;
+        } else {
+          this.isAdmin = false;
         }
       })
     }
@@ -45,6 +56,7 @@ export class NavbarComponent implements OnInit {
 
   logOut() {
     this.isLogin = false;
+    this.isAdmin = false;
     this.authService.logOut();
     this.router.navigate(['login']);
   }
@@ -55,7 +67,7 @@ export class NavbarComponent implements OnInit {
 
   getAllBooksCategories() {
     this.bookCategoryService.getAll().subscribe(data => {
-      this.listBooksCategories = data;  
+      this.listBooksCategories = data;
     })
   }
 }

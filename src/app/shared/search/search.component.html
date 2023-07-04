@@ -1,0 +1,5 @@
+<div class="d-flex px-3">
+    <input #searchKey class="form-control me-2" type="text" placeholder="Search" aria-label="Search..." required minlength="1"
+        (keyup.enter)="doSearch(searchKey.value)" />
+    <button (click)="doSearch(searchKey.value)" class="btn btn-outline-success">Search</button>
+</div>

@@ -1,0 +1,13 @@
+.card-img,
+.card-img-top,
+.card-img-bottom {
+    width: 600px;
+    height: 700px;
+    object-fit: contain;
+}
+
+.card-img,
+.card-img-top {
+  border-top-left-radius: var(--bs-card-inner-border-radius);
+  border-top-right-radius: var(--bs-card-inner-border-radius);
+}

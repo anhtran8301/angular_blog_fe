@@ -9,18 +9,17 @@ import { UsersPageComponent } from './pages/users/users-page/users-page.componen
 import { authGuard, notAuthGuard } from './guard/auth.guard'
 import { adminGuardGuard } from './guard/admin.guard'
 import { ProductsListComponent } from './pages/products/list-products/list-products.component'
+import { DetailsProductComponent } from './pages/products/details-product/details-product.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    pathMatch: 'full'
   },
-  // {
-  //   path: '**',
-  //   component: HomeComponent,
-  //   pathMatch: 'full'
-  // },
+  {
+    path: 'products/:id',
+    component: DetailsProductComponent,
+  },
   {
     path: 'register',
     component: RegisterComponent,
@@ -51,6 +50,10 @@ const routes: Routes = [
   },
   {
     path: 'products',
+    component: HomeComponent,
+  },
+  {
+    path: 'products/search/:keyword',
     component: HomeComponent,
   },
   {

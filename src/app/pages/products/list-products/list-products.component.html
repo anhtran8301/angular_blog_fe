@@ -10,11 +10,14 @@
                             <p class="text-white mb-0 small">x4</p>
                         </div>
                     </div>
-                    <img src="{{prod.imageUrl}}"
-                        class="card-img-top" alt="Laptop" />
+                    <a routerLink="/products/{{prod.id}}">
+                        <img src="{{prod.imageUrl}}" class="card-img-top" alt="Laptop" />
+                    </a>
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h3 class="text-primary">{{prod.name}}</h3>
+                            <a routerLink="/products/{{prod.id}}">
+                                <h3 class="text-primary">{{prod.name}}</h3>
+                            </a>
                             <p class="small text-danger"><s>{{prod.unitPrice | currency: "USD"}}</s></p>
                         </div>
 
@@ -35,7 +38,7 @@
                         </div>
                         <button class="add-to-cart" (click)="toggleDone()">
                             <div class="pre-text">
-                                <i class="fas fa-cart-plus"></i> ADD TO CART
+                                <i class="fas fa-cart-plus"></i> Add to cart
                             </div>
 
                             <div class="pre-text done">
@@ -47,10 +50,27 @@
                 </div>
             </div>
 
+            <!--If products empty then display a message-->
+            <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                No products found.
+            </div>
+        </div>
+        <div class="footer-pagination">
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-9 pl-3">
+                            <ngb-pagination [(page)]="pageNumber"
+                                            [pageSize]="pageSize"
+                                            [collectionSize]="totalElements"
+                                            (pageChange)="listProduct()">
+
+                            </ngb-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
-
-<script>
-    
-</script>

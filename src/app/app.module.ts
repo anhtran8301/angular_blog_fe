@@ -39,11 +39,14 @@ import { ChangeAvatarComponent } from './auth/change-avatar/change-avatar.compon
 import { AuthInterceptor } from './service/auth.interceptor';
 import { ListCategoriesComponent } from './pages/books-categories/list-categories/list-categories.component';
 import { CreateCategoryComponent } from './pages/books-categories/create-category/create-category.component';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UsersPageComponent } from './pages/users/users-page/users-page.component';
 import { authGuard } from './guard/auth.guard';
 import { ProductsListComponent } from './pages/products/list-products/list-products.component';
-
+import { SearchComponent } from './shared/search/search.component';
+import { DetailsProductComponent } from './pages/products/details-product/details-product.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,9 @@ import { ProductsListComponent } from './pages/products/list-products/list-produ
     ListCategoriesComponent,
     CreateCategoryComponent,
     UsersPageComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    SearchComponent,
+    DetailsProductComponent
   ],
   imports: [
     BrowserModule,
@@ -81,12 +86,14 @@ import { ProductsListComponent } from './pages/products/list-products/list-produ
     MatSnackBarModule,
     ReactiveFormsModule,
     NgToastModule,
+    NgbModule,
     MatProgressSpinnerModule,
     NgConfirmModule,
     MatDatepickerModule,
     AngularFireStorageModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatDialogModule,
+    NgxPaginationModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     ToastrModule.forRoot({
@@ -97,7 +104,7 @@ import { ProductsListComponent } from './pages/products/list-products/list-produ
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    
+
   ],
   bootstrap: [AppComponent]
 })
