@@ -50,8 +50,8 @@ export class TokenService {
 
   public getRole(): string[] {
     this.roles = [];
-    if(this.getToken()) {
-    //@ts-ignore
+    if (this.getToken()) {
+      //@ts-ignore
       JSON.parse(sessionStorage.getItem(ROLE_KEY)).forEach(role => {
         this.roles.push(role.authority)
       });

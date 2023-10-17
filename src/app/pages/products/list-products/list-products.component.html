@@ -11,19 +11,19 @@
                         </div>
                     </div>
                     <a routerLink="/products/{{prod.id}}">
-                        <img src="{{prod.imageUrl}}" class="card-img-top" alt="Laptop" />
+                        <img src="{{prod.imagesString}}" class="card-img-top" alt="Laptop" />
                     </a>
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <a routerLink="/products/{{prod.id}}">
                                 <h3 class="text-primary">{{prod.name}}</h3>
                             </a>
-                            <p class="small text-danger"><s>{{prod.unitPrice | currency: "USD"}}</s></p>
+                            <p class="small text-danger"><s>$00.00</s></p>
                         </div>
 
                         <div class="d-flex justify-content-between mb-3">
                             <h5 class="mb-0">HP Notebook</h5>
-                            <h5 class="text-dark mb-0">$999</h5>
+                            <h5 class="text-dark mb-0">{{prod.unitPrice | currency: "USD"}}</h5>
                         </div>
 
                         <div class="d-flex justify-content-between mb-2">
@@ -36,13 +36,13 @@
                                 <i class="fa fa-star"></i>
                             </div>
                         </div>
-                        <button class="add-to-cart" (click)="toggleDone()">
+                        <button class="add-to-cart" (click)="addToCart(prod)">
                             <div class="pre-text">
                                 <i class="fas fa-cart-plus"></i> Add to cart
                             </div>
 
                             <div class="pre-text done">
-                                <div class="post-text"><i class="fas fa-check"></i> ADDED</div>
+                                <div  class="post-text"><i class="fas fa-check"></i> ADDED</div>
                             </div>
 
                         </button>
@@ -61,12 +61,24 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-9 pl-3">
-                            <ngb-pagination [(page)]="pageNumber"
-                                            [pageSize]="pageSize"
-                                            [collectionSize]="totalElements"
-                                            (pageChange)="listProduct()">
+                            <ngb-pagination 
+                            [(page)]="pageNumber" 
+                            [pageSize]="pageSize" 
+                            [collectionSize]="totalElements"
+                            [maxSize]="5"
+                            [boundaryLinks]="true"
+                            (pageChange)="listProduct()">
 
                             </ngb-pagination>
+                        </div>
+                        <div class="col-md-3">
+                            <span>Page Size</span>
+                            <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                                <option>3</option>
+                                <option selected="true">10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
                         </div>
                     </div>
                 </div>

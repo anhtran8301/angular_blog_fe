@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.findAll().subscribe(data => {
-      // console.log(data);
+      console.log(data);
 
       this.posts = data.content;
       // console.log(this.posts);

@@ -47,6 +47,10 @@ import { SearchComponent } from './shared/search/search.component';
 import { DetailsProductComponent } from './pages/products/details-product/details-product.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartStatusComponent } from './pages/carts/cart-status/cart-status.component';
+import { DetailsCartComponent } from './pages/carts/details-cart/details-cart.component';
+import { CheckOutComponent } from './pages/check-out/check-out.component';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +67,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UsersPageComponent,
     ProductsListComponent,
     SearchComponent,
-    DetailsProductComponent
+    DetailsProductComponent,
+    CartStatusComponent,
+    DetailsCartComponent,
+    CheckOutComponent
   ],
   imports: [
     BrowserModule,

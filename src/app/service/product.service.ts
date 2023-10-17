@@ -32,8 +32,8 @@ getProductsByBookCategory(bookCategoryId: number, pageNo: number, pageSize: numb
     return this.httpClient.get<any>(paginationUrl);
   }
 
-  searchProducts(keyword: string): Observable<any> {
-    const pathSearch = `${this.API_PRODUCT}/search?query=${keyword}`
+  searchProducts(keyword: string, pageNo: number, pageSize: number): Observable<any> {
+    const pathSearch = `${this.API_PRODUCT}/search?query=${keyword}&pageNo=${pageNo}&pageSize=${pageSize}`
     return this.httpClient.get<any>(`${pathSearch}`)
   }
 

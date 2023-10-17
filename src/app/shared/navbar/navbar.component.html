@@ -35,13 +35,7 @@
       <!-- Search Component -->
       <app-search></app-search>
 
-      <div class="d-flex">
-        <button class="btn btn-outline-dark" type="submit">
-          <i class="bi-cart-fill me-1"></i>
-          Cart
-          <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-        </button>
-      </div>
+      <app-cart-status></app-cart-status>
 
       <div *ngIf="!isLogin">
         <button mat-raised-button color="accent" routerLink="/login" class="m-3">
@@ -52,9 +46,9 @@
         </button>
       </div>
 
-      <div class="dropdown mx-5">
+      <div class="dropdown mx-5" *ngIf="isLogin">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false" *ngIf="isLogin">
+          aria-expanded="false">
           Account
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">

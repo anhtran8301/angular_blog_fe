@@ -1,5 +1,5 @@
 export const environment = {
-    API_LOCAL: 'http://localhost:8080/api/v1',
+    API_LOCAL: 'https://katitvn.id.vn/api/v1',
     production: true,
 
     //firebase config
