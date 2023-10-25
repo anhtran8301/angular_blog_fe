@@ -1,0 +1,73 @@
+<section>
+    <div class="container py-5">
+        <h6 class="newest-prod">Sách mới nhất</h6>
+        <div class="row">
+            <div *ngFor="let prod of products.slice(0, 4)" class="col-md-6 col-lg-3 col-sm-6 mb-4 mb-lg-0">
+                <div class="card mb-5 box">
+                    <div class="d-flex justify-content-between p-3">
+                        <p class="lead mb-0">Ưu đãi trong hôm nay</p>
+                        <div class="bg rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
+                            style="width: 35px; height: 35px;">
+                            <p class="text-white mb-0 small">x4</p>
+                        </div>
+                    </div>
+                    <a routerLink="/products/{{prod.id}}">
+                        <img src="{{prod.imagesString}}" class="card-img-top" alt="{{prod.name}}" />
+                    </a>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <a routerLink="/products/{{prod.id}}">
+                                <h3 class=" prod-name">{{prod.name}}</h3>
+                            </a>
+                            <p class="small text-danger"><s>$00.00</s></p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <h5 class="mb-0">HP Notebook</h5>
+                            <h5 class="text-dark mb-0">{{prod.unitPrice | currency: "VND"}}</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <p class="text-muted mb-0">Available: <span class="fw-bold">{{prod.quantity}}</span></p>
+                            <div class="ms-auto text-warning">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <button (click)="addToCart(prod)" class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <i class="bi-cart-fill me-1"></i>
+                            Thêm vào giỏ hàng
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--If products empty then display a message-->
+            <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                No products found.
+            </div>
+        </div>
+        <div class="footer-pagination">
+            <div class="d-flex justify-content-center align-items-center">
+                <div>
+                    <ngb-pagination [(page)]="pageNumber" [pageSize]="pageSize" [collectionSize]="totalElements"
+                        [maxSize]="2" [boundaryLinks]="true" (pageChange)="listProduct()">
+                    </ngb-pagination>
+                </div>
+                <!-- <div class="d-none d-md-block justify-content-center">
+                    <span class="text-center">Page Size</span>
+                    <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                        <option>3</option>
+                        <option selected="true">10</option>
+                        <option>15</option>
+                        <option>20</option>
+                    </select>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+</section>

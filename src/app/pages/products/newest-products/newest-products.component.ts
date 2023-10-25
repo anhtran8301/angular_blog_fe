@@ -8,11 +8,11 @@ import { CartService } from 'src/app/service/cart.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-list-products',
-  templateUrl: './list-products.component.html',
-  styleUrls: ['./list-products.component.scss']
+  selector: 'app-newest-products',
+  templateUrl: './newest-products.component.html',
+  styleUrls: ['./newest-products.component.scss']
 })
-export class ProductsListComponent implements OnInit {
+export class NewestComponent implements OnInit {
   added: boolean = false;
 
   products: Product[] = [];
@@ -21,7 +21,7 @@ export class ProductsListComponent implements OnInit {
   searchMode: boolean = false;
 
   pageNumber: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 4;
   totalElements: number = 0;
 
   previousKeyword: string = '';
@@ -58,8 +58,8 @@ export class ProductsListComponent implements OnInit {
       .subscribe(this.processResult())
   }
 
-  getAllProducts() {
-    this.productService.getProductsPaginate(this.pageNumber - 1, this.pageSize)
+  getNewestProducts() {
+    this.productService.getNewestProducts(this.pageNumber - 1, this.pageSize)
       .subscribe(this.processResult())
   }
 
@@ -87,7 +87,7 @@ export class ProductsListComponent implements OnInit {
       this.currentBookCategoryId = Number(this.route.snapshot.paramMap.get('id'));
       this.getProductsByBookCategory();
     } else {
-      this.getAllProducts();
+      this.getNewestProducts();
     }
 
   }
@@ -115,7 +115,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   toggleDone(): void {
-    const doneElement = document.querySelector(".done") as HTMLElement;
+    // const doneElement = document.querySelector(".done") as HTMLElement;
     this.toastService.success('Added to cart successfully')
   }
 

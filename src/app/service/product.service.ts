@@ -17,11 +17,11 @@ export class ProductService {
   //   const pathUrl = `${this.API_PRODUCT}/categories/${bookCategoryId}`
   //   return this.httpClient.get<any>(pathUrl);
   // }
-getProductsByBookCategory(bookCategoryId: number, pageNo: number, pageSize: number): Observable<any> {
+  getProductsByBookCategory(bookCategoryId: number, pageNo: number, pageSize: number): Observable<any> {
     const pathUrl = `${this.API_PRODUCT}/categories/${bookCategoryId}?pageNo=${pageNo}&pageSize=${pageSize}`
     return this.httpClient.get<any>(pathUrl);
   }
-  
+
 
   getAllProducts(): Observable<any> {
     return this.httpClient.get<any>(this.API_PRODUCT);
@@ -39,5 +39,14 @@ getProductsByBookCategory(bookCategoryId: number, pageNo: number, pageSize: numb
 
   getProductById(id: number): Observable<any> {
     return this.httpClient.get<any>(`${this.API_PRODUCT}/${id}`)
+  }
+
+  getNewestProducts(pageNo: number, pageSize: number): Observable<any> {
+    const paginationUrl = `${this.API_PRODUCT}/newest?pageNo=${pageNo}&pageSize=${pageSize}`;
+    return this.httpClient.get<any>(paginationUrl);
+  }
+
+  getTrendingProducts(): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_PRODUCT}/best-seller`);
   }
 }

@@ -13,6 +13,12 @@ export class TokenService {
 
   constructor() { }
 
+  public isAdmin(roles: string[]): boolean {
+    if (roles.some(role => JSON.stringify(role) === JSON.stringify('ROLE_ADMIN'))) {
+      return true;
+    } else { return false; }
+  }
+
   public setName(name: string) {
     sessionStorage.removeItem(NAME_KEY);
     sessionStorage.setItem(NAME_KEY, name);

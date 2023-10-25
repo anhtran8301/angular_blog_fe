@@ -27,10 +27,12 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.authService.getCheckRegister()) {
+    if (this.authService.getCheckRegister()) {
       this.toast.success("Register Successfully!");
     }
   }
+
+
 
   login() {
     this.loginModel = new Login(
@@ -46,9 +48,10 @@ export class LoginComponent implements OnInit {
       //@ts-ignore
       this.tokenService.setToken(data.accessToken);
       //@ts-ignore
-      this.tokenService.setRole(data.user.roles)
-
-      this.router.navigate(['']);
+      this.tokenService.setRole(data.user.roles);
+      this.tokenService.isAdmin(this.tokenService.getRole())
+        ? this.router.navigate(['admin']) 
+        : this.router.navigate([''])
     }, errorResponse => {
       this.toast.error(errorResponse.error.message, "Login fail !!!")
     })

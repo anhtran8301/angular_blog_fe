@@ -8,10 +8,11 @@ import { ListCategoriesComponent } from './pages/books-categories/list-categorie
 import { UsersPageComponent } from './pages/users/users-page/users-page.component';
 import { authGuard, notAuthGuard } from './guard/auth.guard'
 import { adminGuardGuard } from './guard/admin.guard'
-import { ProductsListComponent } from './pages/products/list-products/list-products.component'
+import { NewestComponent } from './pages/products/newest-products/newest-products.component'
 import { DetailsProductComponent } from './pages/products/details-product/details-product.component';
 import { DetailsCartComponent } from './pages/carts/details-cart/details-cart.component';
 import { CheckOutComponent } from './pages/check-out/check-out.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,11 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersPageComponent
+  }, 
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [adminGuardGuard],
   }
 
 

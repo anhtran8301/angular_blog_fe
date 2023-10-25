@@ -42,7 +42,7 @@ import { CreateCategoryComponent } from './pages/books-categories/create-categor
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UsersPageComponent } from './pages/users/users-page/users-page.component';
 import { authGuard } from './guard/auth.guard';
-import { ProductsListComponent } from './pages/products/list-products/list-products.component';
+import { NewestComponent } from './pages/products/newest-products/newest-products.component';
 import { SearchComponent } from './shared/search/search.component';
 import { DetailsProductComponent } from './pages/products/details-product/details-product.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -50,6 +50,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './pages/carts/cart-status/cart-status.component';
 import { DetailsCartComponent } from './pages/carts/details-cart/details-cart.component';
 import { CheckOutComponent } from './pages/check-out/check-out.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { TrendingProductsComponent } from './pages/products/trending-products/trending-products.component';
+import { AdsComponent } from './pages/products/ads/ads.component';
 
 
 @NgModule({
@@ -65,12 +68,15 @@ import { CheckOutComponent } from './pages/check-out/check-out.component';
     ListCategoriesComponent,
     CreateCategoryComponent,
     UsersPageComponent,
-    ProductsListComponent,
+    NewestComponent,
     SearchComponent,
     DetailsProductComponent,
     CartStatusComponent,
     DetailsCartComponent,
-    CheckOutComponent
+    CheckOutComponent,
+    AdminComponent,
+    TrendingProductsComponent,
+    AdsComponent
   ],
   imports: [
     BrowserModule,
