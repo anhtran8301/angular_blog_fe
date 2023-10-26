@@ -18,6 +18,8 @@ export class NewestComponent implements OnInit {
   products: Product[] = [];
   currentBookCategoryId: any;
   prevBookCategoryId: any;
+  currentAuthorId: any;
+  prevAuthorId: any;
   searchMode: boolean = false;
 
   pageNumber: number = 1;
@@ -38,9 +40,15 @@ export class NewestComponent implements OnInit {
     if (this.prevBookCategoryId != this.currentBookCategoryId) {
       this.pageNumber = 1;
     }
-    this.route.paramMap.subscribe(() => {
+    if (this.prevAuthorId != this.currentAuthorId) {
+      this.pageNumber = 1;
+    }
+    this.route.params.subscribe(params => {
+      // Lấy tham số từ URL tùy thuộc vào tên bạn đã đặt trong route
+      this.currentBookCategoryId = +params['categoryId'];
+      this.currentAuthorId = +params['authorId'];
       this.listProduct();
-    })
+    });
   }
 
   listProduct() {
@@ -53,14 +61,22 @@ export class NewestComponent implements OnInit {
     }
   }
 
-  getProductsByBookCategory() {
-    this.productService.getProductsByBookCategory(this.currentBookCategoryId, this.pageNumber - 1, this.pageSize)
-      .subscribe(this.processResult())
-  }
-
   getNewestProducts() {
     this.productService.getNewestProducts(this.pageNumber - 1, this.pageSize)
       .subscribe(this.processResult())
+  }
+
+  getProductsByBookCategory() {
+    this.productService.getProductsByBookCategory(this.currentBookCategoryId, this.pageNumber - 1, this.pageSize)
+      .subscribe(this.processResult())
+      console.log("getProductsByCate")
+  }
+
+  getProductsByAuthor() {
+    this.productService.getProductsByAuthor(this.currentAuthorId, this.pageNumber - 1, this.pageSize)
+      .subscribe(this.processResult())
+      console.log("getProductsByAuthor");
+      
   }
 
   handleSearchProducts() {
@@ -80,19 +96,23 @@ export class NewestComponent implements OnInit {
   }
 
   handleListProducts() {
-    const hasCategory: boolean = this.route.snapshot.paramMap.has('id');
+    const hasCategory: boolean = this.route.snapshot.paramMap.has('/categories/id');
     this.prevBookCategoryId = this.currentBookCategoryId;
-
-    if (hasCategory) {
-      this.currentBookCategoryId = Number(this.route.snapshot.paramMap.get('id'));
+  
+    const hasAuthor: boolean = this.route.snapshot.paramMap.has('/authors/id');
+    this.prevAuthorId = this.currentAuthorId;
+  
+    if (this.currentBookCategoryId) {
       this.getProductsByBookCategory();
+    } else if (this.currentAuthorId) {
+      this.getProductsByAuthor();
     } else {
       this.getNewestProducts();
     }
-
   }
+  
 
-  addToCart(product: Product){
+  addToCart(product: Product) {
     this.toggleDone();
     const cartItem = new CartItem(product);
     this.cartService.addToCart(cartItem);
@@ -107,7 +127,7 @@ export class NewestComponent implements OnInit {
     return (data: any) => {
       this.products = data.content;
       console.log(this.products);
-      
+
       this.pageNumber = data.pageNo + 1;
       this.pageSize = data.pageSize;
       this.totalElements = data.totalElements;
@@ -116,8 +136,9 @@ export class NewestComponent implements OnInit {
 
   toggleDone(): void {
     // const doneElement = document.querySelector(".done") as HTMLElement;
-    this.toastService.success('Added to cart successfully')
+    this.toastService.success('Thêm vào giỏ hàng thành công')
   }
+
 
 
 }

@@ -53,6 +53,7 @@ import { CheckOutComponent } from './pages/check-out/check-out.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { TrendingProductsComponent } from './pages/products/trending-products/trending-products.component';
 import { AdsComponent } from './pages/products/ads/ads.component';
+import { DropdownMenuComponent } from './shared/dropdown-menu/dropdown-menu.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { AdsComponent } from './pages/products/ads/ads.component';
     CheckOutComponent,
     AdminComponent,
     TrendingProductsComponent,
-    AdsComponent
+    AdsComponent,
+    DropdownMenuComponent
   ],
   imports: [
     BrowserModule,

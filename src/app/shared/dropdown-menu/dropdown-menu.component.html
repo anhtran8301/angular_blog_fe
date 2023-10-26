@@ -1,0 +1,13 @@
+<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+  <div *ngFor="let item of listItems">
+    <li>
+      <a class="dropdown-item" 
+        [routerLink]="routerLinkPrefix + '/' + item.id"
+        routerLinkActive="active-link">{{item.name}}
+      </a>
+    </li>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+  </div>
+</ul>

@@ -42,16 +42,3 @@
 .logo {
   width: 60px;
 }
-
-.active-link{
-  font-weight: bold;
-  color: #205b8d;
-}
-
-.active-link:hover {
-  cursor: pointer;
-}
-.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0; /* remove the gap so it doesn't close */
-}

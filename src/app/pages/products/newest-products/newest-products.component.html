@@ -1,6 +1,6 @@
 <section>
-    <div class="container py-5">
-        <h6 class="newest-prod">Sách mới nhất</h6>
+    <div class="container pb-5">
+        <h6 class="newest-prod pb-5">Sách mới nhất</h6>
         <div class="row">
             <div *ngFor="let prod of products.slice(0, 4)" class="col-md-6 col-lg-3 col-sm-6 mb-4 mb-lg-0">
                 <div class="card mb-5 box">
@@ -8,7 +8,7 @@
                         <p class="lead mb-0">Ưu đãi trong hôm nay</p>
                         <div class="bg rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
                             style="width: 35px; height: 35px;">
-                            <p class="text-white mb-0 small">x4</p>
+                            <p class="text-white mb-0 small">-{{prod.discount}}%</p>
                         </div>
                     </div>
                     <a routerLink="/products/{{prod.id}}">
@@ -19,16 +19,16 @@
                             <a routerLink="/products/{{prod.id}}">
                                 <h3 class=" prod-name">{{prod.name}}</h3>
                             </a>
-                            <p class="small text-danger"><s>$00.00</s></p>
+                            <p class="small text-danger"><s>{{prod.unitPrice | currency: "VND"}}</s></p>
                         </div>
 
                         <div class="d-flex justify-content-between mb-3">
-                            <h5 class="mb-0">HP Notebook</h5>
-                            <h5 class="text-dark mb-0">{{prod.unitPrice | currency: "VND"}}</h5>
+                            <h5 class="mb-0">Đơn giá</h5>
+                            <h5 class="text-dark mb-0">{{prod.unitPrice - (prod.unitPrice * prod.discount / 100) | currency: "VND"}}</h5>
                         </div>
 
                         <div class="d-flex justify-content-between mb-2">
-                            <p class="text-muted mb-0">Available: <span class="fw-bold">{{prod.quantity}}</span></p>
+                            <p class="text-muted mb-0">Số lượng: <span class="fw-bold">{{prod.quantity}}</span></p>
                             <div class="ms-auto text-warning">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -47,7 +47,7 @@
 
             <!--If products empty then display a message-->
             <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
-                No products found.
+                Không tìm thấy sản phẩm.
             </div>
         </div>
         <div class="footer-pagination">

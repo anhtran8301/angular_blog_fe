@@ -41,7 +41,11 @@ const routes: Routes = [
     canActivate: [adminGuardGuard]
   },
   {
-    path: 'products/categories/:id',
+    path: 'products/categories',
+    component: HomeComponent,
+  },
+  {
+    path: 'products/categories/:categoryId',
     component: HomeComponent,
   },
   {
@@ -49,7 +53,11 @@ const routes: Routes = [
     component: DetailsProductComponent,
   },
   {
-    path: 'products/categories',
+    path: 'products/authors',
+    component: HomeComponent,
+  },
+  {
+    path: 'products/authors/:authorId',
     component: HomeComponent,
   },
   {

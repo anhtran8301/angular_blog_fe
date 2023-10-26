@@ -49,4 +49,11 @@ export class ProductService {
   getTrendingProducts(): Observable<any> {
     return this.httpClient.get<any>(`${this.API_PRODUCT}/best-seller`);
   }
+
+  getProductsByAuthor(authorId: number, pageNo: number, pageSize: number): Observable<any> {
+    const pathUrl = `${this.API_PRODUCT}/authors/${authorId}?pageNo=${pageNo}&pageSize=${pageSize}`
+    console.log("path" + pathUrl);
+    
+    return this.httpClient.get<any>(pathUrl);
+  }
 }

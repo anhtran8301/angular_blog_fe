@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { BookCategoryService } from 'src/app/service/book-category.service';
 import { BookCategory } from 'src/app/models/BookCategory';
+import { AuthorService } from 'src/app/service/author.service';
+import { Author } from 'src/app/models/Author';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +15,7 @@ import { BookCategory } from 'src/app/models/BookCategory';
 export class NavbarComponent implements OnInit {
 
   listBooksCategories: BookCategory[] = [];
+  listAuthors: Author[] = [];
   name = '';
   avatar = '';
   isLogin = false;
@@ -26,20 +29,23 @@ export class NavbarComponent implements OnInit {
     private tokenService: TokenService,
     private router: Router,
     private authService: AuthService,
-    private bookCategoryService: BookCategoryService) {
+    private bookCategoryService: BookCategoryService,
+    private authorService: AuthorService
+  ) {
   }
 
   ngOnInit(): void {
     this.getAllBooksCategories();
+    this.getAllAuthors();
     this.router.events.subscribe(event => {
       if (event.constructor.name === "NavigationEnd") {
         this.checkLogin();
       }
     })
-   
+
   }
 
-  checkLogin(){
+  checkLogin() {
     if (this.tokenService.getToken()) {
       this.name = this.tokenService.getName();
       this.avatar = this.tokenService.getAvatar();
@@ -68,6 +74,13 @@ export class NavbarComponent implements OnInit {
   getAllBooksCategories() {
     this.bookCategoryService.getAll().subscribe(data => {
       this.listBooksCategories = data;
+    })
+  }
+
+  getAllAuthors() {
+    this.authorService.getAll().subscribe(data => {
+      console.log(data)
+      this.listAuthors = data;
     })
   }
 }
