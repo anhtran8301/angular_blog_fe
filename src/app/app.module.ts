@@ -54,6 +54,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { TrendingProductsComponent } from './pages/products/trending-products/trending-products.component';
 import { AdsComponent } from './pages/products/ads/ads.component';
 import { DropdownMenuComponent } from './shared/dropdown-menu/dropdown-menu.component';
+import { ListProductsComponent } from './pages/products/list-products/list-products.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { DropdownMenuComponent } from './shared/dropdown-menu/dropdown-menu.comp
     AdminComponent,
     TrendingProductsComponent,
     AdsComponent,
-    DropdownMenuComponent
+    DropdownMenuComponent,
+    ListProductsComponent
   ],
   imports: [
     BrowserModule,

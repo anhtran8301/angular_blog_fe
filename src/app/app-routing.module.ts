@@ -13,6 +13,7 @@ import { DetailsProductComponent } from './pages/products/details-product/detail
 import { DetailsCartComponent } from './pages/carts/details-cart/details-cart.component';
 import { CheckOutComponent } from './pages/check-out/check-out.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ListProductsComponent } from './pages/products/list-products/list-products.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,16 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [notAuthGuard],
   },
+   
+  {
+    path: 'users',
+    component: UsersPageComponent
+  }, 
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [adminGuardGuard],
+  },
   {
     path: 'change-avatar',
     component: ChangeAvatarComponent,
@@ -46,7 +57,11 @@ const routes: Routes = [
   },
   {
     path: 'products/categories/:categoryId',
-    component: HomeComponent,
+    component: ListProductsComponent,
+  },
+  {
+    path: 'products',
+    component: ListProductsComponent,
   },
   {
     path: 'products/:id',
@@ -58,11 +73,11 @@ const routes: Routes = [
   },
   {
     path: 'products/authors/:authorId',
-    component: HomeComponent,
+    component: ListProductsComponent,
   },
   {
-    path: 'products',
-    component: HomeComponent,
+    path: 'products/search/:keyword',
+    component: ListProductsComponent,
   },
   {
     path: 'cart-details',
@@ -72,20 +87,6 @@ const routes: Routes = [
     path: 'check-out',
     component: CheckOutComponent
   },
-  {
-    path: 'products/search/:keyword',
-    component: HomeComponent,
-  },
-  {
-    path: 'users',
-    component: UsersPageComponent
-  }, 
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [adminGuardGuard],
-  }
-
 
 ];
 

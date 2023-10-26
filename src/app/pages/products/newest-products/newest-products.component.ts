@@ -44,7 +44,6 @@ export class NewestComponent implements OnInit {
       this.pageNumber = 1;
     }
     this.route.params.subscribe(params => {
-      // Lấy tham số từ URL tùy thuộc vào tên bạn đã đặt trong route
       this.currentBookCategoryId = +params['categoryId'];
       this.currentAuthorId = +params['authorId'];
       this.listProduct();
@@ -111,6 +110,16 @@ export class NewestComponent implements OnInit {
     }
   }
   
+  processResult() {
+    return (data: any) => {
+      this.products = data.content;
+      console.log(this.products);
+
+      this.pageNumber = data.pageNo + 1;
+      this.pageSize = data.pageSize;
+      this.totalElements = data.totalElements;
+    }
+  }
 
   addToCart(product: Product) {
     this.toggleDone();
@@ -121,17 +130,6 @@ export class NewestComponent implements OnInit {
     this.pageSize = Number(pageSize);
     this.pageNumber = 1;
     this.listProduct();
-  }
-
-  processResult() {
-    return (data: any) => {
-      this.products = data.content;
-      console.log(this.products);
-
-      this.pageNumber = data.pageNo + 1;
-      this.pageSize = data.pageSize;
-      this.totalElements = data.totalElements;
-    }
   }
 
   toggleDone(): void {
