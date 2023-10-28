@@ -23,14 +23,14 @@ export class UpCommingProductsComponent implements OnInit {
     private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getComingUpProducts();
     this.currentProduct = this.products[0];
     
   }
 
 
-  getAllProducts() {
-    this.productService.getAllProducts().subscribe(data => {
+  getComingUpProducts() {
+    this.productService.getComingUpProducts().subscribe(data => {
       this.products = data.content;
       this.currentProduct = this.products[0];
     })

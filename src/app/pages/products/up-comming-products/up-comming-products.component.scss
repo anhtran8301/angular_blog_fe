@@ -5,13 +5,13 @@
 }
 
 .scroll-div .content {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .scroll-slide {
-  width: 550px;
-  height: 550px;
+  max-width: 450px;
+  max-height: 450px;
   object-fit: contain;
 }
 
@@ -23,6 +23,48 @@
   line-height: 1.5;
   font-size: 1.5rem;
 }
-.prod-coming-up-release-day{
+.prod-coming-up-release-day,
+.prod-coming-up-quantity,
+.prod-coming-up-price{
+  margin: 0;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.scroll-slide-content{
+
+}
+
+.discount{
+  opacity: 1;
+    transform: none;
+    height: 24px;
+    min-width: 22px;
+    line-height: 0;
+    border-radius: 6px;
+    cursor: default;
+    align-items: center;
+    white-space: nowrap;
+    display: inline-flex;
+    justify-content: center;
+    padding: 0px 8px;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    background-color: #FF5630;
+    font-weight: 700;
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+.price-product{
+  font-size: 1.25rem;
+  color: #ccc;
+  text-decoration: line-through;
+}
+
+.after-discount{
+  font-size: 1.25rem;
+  color: #333;
   
 }

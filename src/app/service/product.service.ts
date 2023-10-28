@@ -61,4 +61,9 @@ export class ProductService {
     
     return this.httpClient.get<any>(pathUrl);
   }
+
+  getComingUpProducts(): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_PRODUCT}/up-coming`);
+  }
+
 }
