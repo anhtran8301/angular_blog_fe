@@ -23,7 +23,6 @@ export class TrendingProductsComponent {
 
   getTrendingProducts(){
     this.productService.getTrendingProducts().subscribe(data => {
-      console.log("trending " + data);
       this.products = data.content;
     })
   }

@@ -13,6 +13,7 @@
         <li class="nav-item">
           <a class="nav-link" *ngIf="isAdmin" routerLink="/categories">Create Book Category</a>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -33,29 +34,28 @@
             [listItems]="listBooksCategories"
             routerLinkPrefix="/products/categories">
           </app-dropdown-menu>
-
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Tác giả
           </a>
-          <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <div *ngFor="let bookCategory of listBooksCategories">
-              <li>
-                <a class="dropdown-item" routerLink="/products/categories/{{bookCategory.id}}"
-                  routerLinkActive="active-link">{{bookCategory.name}}</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-            </div>
-          </ul> -->
           <app-dropdown-menu 
             [listItems]="listAuthors"
             routerLinkPrefix="/products/authors">
           </app-dropdown-menu>
+        </li>
 
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Nhà xuất bản
+          </a>
+          <app-dropdown-menu 
+            [listItems]="listPublishers"
+            routerLinkPrefix="/products/publishers">
+          </app-dropdown-menu>
         </li>
       </ul>
 

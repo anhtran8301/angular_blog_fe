@@ -55,8 +55,10 @@ import { TrendingProductsComponent } from './pages/products/trending-products/tr
 import { AdsComponent } from './pages/products/ads/ads.component';
 import { DropdownMenuComponent } from './shared/dropdown-menu/dropdown-menu.component';
 import { ListProductsComponent } from './pages/products/list-products/list-products.component';
-
-
+import { UpCommingProductsComponent } from './pages/products/up-comming-products/up-comming-products.component';
+import { CarouselModule } from 'primeng/carousel';
+import {ButtonModule} from 'primeng/button';
+import { TagModule } from 'primeng/tag';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +82,9 @@ import { ListProductsComponent } from './pages/products/list-products/list-produ
     TrendingProductsComponent,
     AdsComponent,
     DropdownMenuComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    UpCommingProductsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -111,6 +115,9 @@ import { ListProductsComponent } from './pages/products/list-products/list-produ
     MatButtonModule,
     MatDialogModule,
     NgxPaginationModule,
+    CarouselModule,
+    ButtonModule,
+    TagModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     ToastrModule.forRoot({

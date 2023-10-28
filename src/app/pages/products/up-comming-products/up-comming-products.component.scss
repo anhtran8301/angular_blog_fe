@@ -1,0 +1,28 @@
+.scroll-div {
+  min-height: 600px;
+  max-height: 700px;
+  overflow-y: scroll;
+}
+
+.scroll-div .content {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.scroll-slide {
+  width: 550px;
+  height: 550px;
+  object-fit: contain;
+}
+
+.prod-coming-up-name {
+  color: #00AB55;
+  opacity: 1;
+  transform: none;
+  font-weight: 700;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+.prod-coming-up-release-day{
+  
+}

@@ -32,8 +32,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
-
   login() {
     this.loginModel = new Login(
       this.loginForm.usernameOrEmail,

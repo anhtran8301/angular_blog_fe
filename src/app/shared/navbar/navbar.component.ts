@@ -6,6 +6,8 @@ import { BookCategoryService } from 'src/app/service/book-category.service';
 import { BookCategory } from 'src/app/models/BookCategory';
 import { AuthorService } from 'src/app/service/author.service';
 import { Author } from 'src/app/models/Author';
+import { Publisher } from 'src/app/models/Publisher';
+import { PublisherService } from 'src/app/service/publisher.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +18,8 @@ export class NavbarComponent implements OnInit {
 
   listBooksCategories: BookCategory[] = [];
   listAuthors: Author[] = [];
+  listPublishers: Publisher[] = [];
+
   name = '';
   avatar = '';
   isLogin = false;
@@ -30,6 +34,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private bookCategoryService: BookCategoryService,
+    private publisherService: PublisherService,
     private authorService: AuthorService
   ) {
   }
@@ -37,6 +42,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getAllBooksCategories();
     this.getAllAuthors();
+    this.getAllPublishers();
     this.router.events.subscribe(event => {
       if (event.constructor.name === "NavigationEnd") {
         this.checkLogin();
@@ -79,8 +85,13 @@ export class NavbarComponent implements OnInit {
 
   getAllAuthors() {
     this.authorService.getAll().subscribe(data => {
-      console.log(data)
       this.listAuthors = data;
+    })
+  }
+
+  getAllPublishers() {
+    this.publisherService.getAll().subscribe(data => {
+      this.listPublishers = data;
     })
   }
 }

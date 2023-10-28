@@ -52,7 +52,12 @@ export class ProductService {
 
   getProductsByAuthor(authorId: number, pageNo: number, pageSize: number): Observable<any> {
     const pathUrl = `${this.API_PRODUCT}/authors/${authorId}?pageNo=${pageNo}&pageSize=${pageSize}`
-    console.log("path" + pathUrl);
+    
+    return this.httpClient.get<any>(pathUrl);
+  }
+
+  getProductsByPublisher(publisherId: number, pageNo: number, pageSize: number): Observable<any> {
+    const pathUrl = `${this.API_PRODUCT}/publishers/${publisherId}?pageNo=${pageNo}&pageSize=${pageSize}`
     
     return this.httpClient.get<any>(pathUrl);
   }

@@ -76,6 +76,14 @@ const routes: Routes = [
     component: ListProductsComponent,
   },
   {
+    path: 'products/publishers',
+    component: HomeComponent,
+  },
+  {
+    path: 'products/publishers/:publisherId',
+    component: ListProductsComponent,
+  },
+  {
     path: 'products/search/:keyword',
     component: ListProductsComponent,
   },

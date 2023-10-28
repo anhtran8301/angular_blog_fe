@@ -16,10 +16,16 @@ export class NewestComponent implements OnInit {
   added: boolean = false;
 
   products: Product[] = [];
+
   currentBookCategoryId: any;
   prevBookCategoryId: any;
+
   currentAuthorId: any;
   prevAuthorId: any;
+
+  currentPublisherId: any;
+  prevPublisherId: any;
+
   searchMode: boolean = false;
 
   pageNumber: number = 1;
@@ -43,8 +49,12 @@ export class NewestComponent implements OnInit {
     if (this.prevAuthorId != this.currentAuthorId) {
       this.pageNumber = 1;
     }
+    if (this.prevPublisherId != this.currentPublisherId) {
+      this.pageNumber = 1;
+    }
     this.route.params.subscribe(params => {
       this.currentBookCategoryId = +params['categoryId'];
+      this.currentPublisherId = +params['publisherId'];
       this.currentAuthorId = +params['authorId'];
       this.listProduct();
     });
@@ -52,7 +62,6 @@ export class NewestComponent implements OnInit {
 
   listProduct() {
     this.searchMode = this.route.snapshot.paramMap.has('keyword');
-
     if (this.searchMode) {
       this.handleSearchProducts();
     } else {
@@ -68,14 +77,16 @@ export class NewestComponent implements OnInit {
   getProductsByBookCategory() {
     this.productService.getProductsByBookCategory(this.currentBookCategoryId, this.pageNumber - 1, this.pageSize)
       .subscribe(this.processResult())
-      console.log("getProductsByCate")
   }
 
   getProductsByAuthor() {
     this.productService.getProductsByAuthor(this.currentAuthorId, this.pageNumber - 1, this.pageSize)
       .subscribe(this.processResult())
-      console.log("getProductsByAuthor");
-      
+  }
+
+  getProductsByPublisher() {
+    this.productService.getProductsByPublisher(this.currentPublisherId, this.pageNumber - 1, this.pageSize)
+      .subscribe(this.processResult())
   }
 
   handleSearchProducts() {
@@ -95,25 +106,30 @@ export class NewestComponent implements OnInit {
   }
 
   handleListProducts() {
-    const hasCategory: boolean = this.route.snapshot.paramMap.has('/categories/id');
-    this.prevBookCategoryId = this.currentBookCategoryId;
-  
-    const hasAuthor: boolean = this.route.snapshot.paramMap.has('/authors/id');
-    this.prevAuthorId = this.currentAuthorId;
-  
+    // const hasCategory: boolean = this.route.snapshot.paramMap.has('/categories/id');
+    // this.prevBookCategoryId = this.currentBookCategoryId;
+
+    // const hasAuthor: boolean = this.route.snapshot.paramMap.has('/authors/id');
+    // this.prevAuthorId = this.currentAuthorId;
+
     if (this.currentBookCategoryId) {
       this.getProductsByBookCategory();
-    } else if (this.currentAuthorId) {
+    } 
+    else if (this.currentAuthorId) {
       this.getProductsByAuthor();
-    } else {
+      
+    } 
+    else if (this.currentPublisherId) {
+      this.getProductsByPublisher();
+    }
+    else {
       this.getNewestProducts();
     }
   }
-  
+
   processResult() {
     return (data: any) => {
       this.products = data.content;
-      console.log(this.products);
 
       this.pageNumber = data.pageNo + 1;
       this.pageSize = data.pageSize;
