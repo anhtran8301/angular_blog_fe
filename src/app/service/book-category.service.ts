@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookCategoryService {
-  // private API_BOOK_CATEGORY = environment.API_LOCAL + '/books-categories'
+
   private API_BOOK_CATEGORY = `${environment.API_LOCAL}/books-categories`;
   
   constructor(

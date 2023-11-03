@@ -8,6 +8,7 @@ import { AuthorService } from 'src/app/service/author.service';
 import { Author } from 'src/app/models/Author';
 import { Publisher } from 'src/app/models/Publisher';
 import { PublisherService } from 'src/app/service/publisher.service';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,13 +30,16 @@ export class NavbarComponent implements OnInit {
   toggleNavbarCollapsing() {
     this.navbarCollapsed = !this.navbarCollapsed;
   }
+
+  
   constructor(
     private tokenService: TokenService,
     private router: Router,
     private authService: AuthService,
     private bookCategoryService: BookCategoryService,
     private publisherService: PublisherService,
-    private authorService: AuthorService
+    private authorService: AuthorService,
+    private cartService: CartService
   ) {
   }
 
@@ -94,4 +98,6 @@ export class NavbarComponent implements OnInit {
       this.listPublishers = data;
     })
   }
+
+   
 }

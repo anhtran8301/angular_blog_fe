@@ -11,8 +11,8 @@
         <!-- <mat-error class="alert alert-primary">{{status}}</mat-error> -->
 
         <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
-          <input name="name" #name="ngModel" [(ngModel)]="registerForm.name" matInput placeholder="Name" required
+          <mat-label>Họ và tên</mat-label>
+          <input name="name" #name="ngModel" [(ngModel)]="registerForm.name" matInput placeholder="vd: Trần Tuấn Anh" required
             minlength="3" maxlength="88">
           <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
           <mat-error *ngIf="name.hasError('required')">The name is required!</mat-error>
@@ -21,7 +21,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input name="username" #username="ngModel" [(ngModel)]="registerForm.username" matInput placeholder="Username"
+          <input name="username" #username="ngModel" [(ngModel)]="registerForm.username" matInput placeholder="vd: anhtran8301"
             required>
           <mat-icon matSuffix>account_circle</mat-icon>
           <mat-error *ngIf="username.hasError('required')">The username is required!</mat-error>
@@ -30,14 +30,23 @@
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input name="email" [(ngModel)]="registerForm.email" matInput [formControl]="emailFormValidate"
-            placeholder="Email" required>
+            placeholder="vd: anhtran8301@gmail.com" required>
           <mat-icon matSuffix>mail</mat-icon>
           <mat-error *ngIf="emailFormValidate.hasError('required')">The email is required!</mat-error>
           <mat-error *ngIf="emailFormValidate.hasError('email')">The email is invalid! Ex: exam@gmail.com</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
+          <mat-label>Số điện thoại</mat-label>
+          <input name="phone" [(ngModel)]="registerForm.phone" matInput
+            placeholder="vd: 0397 782 783" required>
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-error *ngIf="emailFormValidate.hasError('required')">The phone is required!</mat-error>
+          <mat-error *ngIf="emailFormValidate.hasError('phone')">The phone is invalid! Ex: 0123456789</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mật khẩu</mat-label>
           <input name="password" #password="ngModel" [(ngModel)]="registerForm.password" matInput placeholder="Password"
             [type]="hide ? 'password' : 'text'" required minlength="8" maxlength="16" pattern={{passwordRegex}}>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -56,7 +65,7 @@
 
         <div class="mt-5">
           <button type="submit" mat-raised-button color="primary"
-            class="mat-button-toggle-group btn-outline-primary">Register
+            class="mat-button-toggle-group btn-outline-primary">Xác nhận
             <mat-icon color="accent" matSuffix>add_circle_outline</mat-icon>
           </button>
         </div>

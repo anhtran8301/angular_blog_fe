@@ -13,7 +13,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
+          <mat-label>Mật khẩu</mat-label>
           <input name="password" #password="ngModel" [(ngModel)]="loginForm.password" matInput placeholder="Password"
             [type]="hide ? 'password' : 'text'" required minlength="8" maxlength="16" pattern={{passwordRegex}}>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -33,7 +33,7 @@
 
         <div class="mt-5">
           <button type="submit" mat-raised-button color="primary"
-            class="mat-button-toggle-group btn-outline-primary">Login
+            class="mat-button-toggle-group btn-outline-primary">Đăng nhập
             <mat-icon color="accent" matSuffix>login</mat-icon>
           </button>
         </div>

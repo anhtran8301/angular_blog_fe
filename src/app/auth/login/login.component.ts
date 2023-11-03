@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { TokenService } from 'src/app/service/token.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/service/cart.service';
 
 
 @Component({
@@ -22,13 +23,15 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
 
   ) { }
 
   ngOnInit() {
+    this.checkCart();
     if (this.authService.getCheckRegister()) {
-      this.toast.success("Register Successfully!");
+      this.toast.success("Đăng kí thành công!");
     }
   }
 
@@ -48,13 +51,17 @@ export class LoginComponent implements OnInit {
       //@ts-ignore
       this.tokenService.setRole(data.user.roles);
       this.tokenService.isAdmin(this.tokenService.getRole())
-        ? this.router.navigate(['admin']) 
+        ? this.router.navigate(['admin'])
         : this.router.navigate([''])
+      
     }, errorResponse => {
-      this.toast.error(errorResponse.error.message, "Login fail !!!")
+      this.toast.error(errorResponse.error.message, "Đăng nhập thất bại !!!")
     })
   }
 
-
+  checkCart() {
+    const cartItems = this.cartService.cartItems;
+    // console.log("cartItems: " + cartItems.)
+  }
 
 }

@@ -19,6 +19,14 @@ export class TokenService {
     } else { return false; }
   }
 
+  public isLogin(): boolean {
+    if(this.getToken()) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
   public setName(name: string) {
     sessionStorage.removeItem(NAME_KEY);
     sessionStorage.setItem(NAME_KEY, name);

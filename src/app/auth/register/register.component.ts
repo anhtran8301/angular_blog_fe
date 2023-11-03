@@ -39,8 +39,9 @@ export class RegisterComponent implements OnInit {
       this.registerForm.username,
       this.registerForm.email,
       this.registerForm.password,
+      this.registerForm.phone,
     );
-    console.log(this.registerForm);
+    // console.log(this.registerForm);
     this.authService.register(this.registerModel).subscribe(data => {
       // console.log(data);
       // this.toast.success(data.message);

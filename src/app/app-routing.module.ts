@@ -93,7 +93,8 @@ const routes: Routes = [
   },
   {
     path: 'check-out',
-    component: CheckOutComponent
+    component: CheckOutComponent,
+    canActivate: [authGuard]
   },
 
 ];

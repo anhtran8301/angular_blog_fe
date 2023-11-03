@@ -27,6 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { NgConfirmModule } from 'ng-confirm-box';
+import { NgFor, AsyncPipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
@@ -57,8 +58,14 @@ import { DropdownMenuComponent } from './shared/dropdown-menu/dropdown-menu.comp
 import { ListProductsComponent } from './pages/products/list-products/list-products.component';
 import { UpCommingProductsComponent } from './pages/products/up-comming-products/up-comming-products.component';
 import { CarouselModule } from 'primeng/carousel';
-import {ButtonModule} from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ScrollTopBtnComponent } from './shared/scroll-top-btn/scroll-top-btn.component';
+import { CreateProductComponent } from './pages/admin/create-product/create-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +91,9 @@ import { TagModule } from 'primeng/tag';
     DropdownMenuComponent,
     ListProductsComponent,
     UpCommingProductsComponent,
-    
+    ScrollTopBtnComponent,
+    CreateProductComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -97,7 +106,9 @@ import { TagModule } from 'primeng/tag';
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
+    AngularEditorModule,
     MatListModule,
+    MatSortModule,
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
@@ -118,6 +129,10 @@ import { TagModule } from 'primeng/tag';
     CarouselModule,
     ButtonModule,
     TagModule,
+    MatAutocompleteModule,
+    AsyncPipe,
+    MatCheckboxModule,
+    NgFor,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     ToastrModule.forRoot({

@@ -11,10 +11,10 @@ export const adminGuardGuard: CanActivateFn = (route, state) => {
   const isAdmin = roles.some(role => JSON.stringify(role) === JSON.stringify('ROLE_ADMIN'));
 
   if (token && isAdmin) {
-    console.log("Access");
+    // console.log("Access");
     return true;
   } else {
-    console.log("Denied");
+    // console.log("Denied");
     router.navigate(['']);
     return false;
   }

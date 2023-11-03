@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { CartItem } from 'src/app/models/CartItem';
 import { CartService } from 'src/app/service/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { TokenService } from 'src/app/service/token.service';
+import { MessengerService } from 'src/app/service/messenger.service';
 
 @Component({
   selector: 'app-newest-products',
@@ -35,14 +37,17 @@ export class NewestComponent implements OnInit {
   previousKeyword: string = '';
 
   constructor(
+    private msg: MessengerService,
     private productService: ProductService,
     private cartService: CartService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastService: ToastrService
+    private toast: ToastrService,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
+    // this.getCarts();
     if (this.prevBookCategoryId != this.currentBookCategoryId) {
       this.pageNumber = 1;
     }
@@ -89,6 +94,14 @@ export class NewestComponent implements OnInit {
       .subscribe(this.processResult())
   }
 
+  // getCarts() {
+  //   this.cartService.getCarts().subscribe(data => {
+  //     console.log(data)
+  //   }, errorResponse => {
+  //     this.toast.error(errorResponse.error.message)
+  //   })
+  // }
+
   handleSearchProducts() {
     const keyword: string = this.route.snapshot.paramMap.get('keyword')!;
 
@@ -114,11 +127,11 @@ export class NewestComponent implements OnInit {
 
     if (this.currentBookCategoryId) {
       this.getProductsByBookCategory();
-    } 
+    }
     else if (this.currentAuthorId) {
       this.getProductsByAuthor();
-      
-    } 
+
+    }
     else if (this.currentPublisherId) {
       this.getProductsByPublisher();
     }
@@ -137,10 +150,23 @@ export class NewestComponent implements OnInit {
     }
   }
 
-  addToCart(product: Product) {
-    this.toggleDone();
-    const cartItem = new CartItem(product);
-    this.cartService.addToCart(cartItem);
+  handleAddToCart(product: Product) {
+    if (this.tokenService.isLogin()) {
+      
+      const cartItem = new CartItem(product.id, product, 1);
+      this.cartService.addCart(cartItem.quantity, cartItem.id).subscribe(data => {
+        console.log(data);
+        this.msg.sendMsg(product)
+        this.toggleDone();
+      }, errorResponse => {
+        this.toast.error(errorResponse.error.message)
+      })
+
+      // this.cartService.addToCart(cartItem);
+    } else {
+      this.router.navigate(['/login']);
+    }
+
   }
   updatePageSize(pageSize: string) {
     this.pageSize = Number(pageSize);
@@ -150,9 +176,16 @@ export class NewestComponent implements OnInit {
 
   toggleDone(): void {
     // const doneElement = document.querySelector(".done") as HTMLElement;
-    this.toastService.success('Thêm vào giỏ hàng thành công')
+    this.toast.success('Thêm vào giỏ hàng thành công')
   }
 
-
+  // handleAddToCart(productItem: Product) {
+  //   this.cartService.addProductToCart(productItem).subscribe((data) => {
+  //     console.log("111111111" + productItem);
+      
+  //     this.msg.sendMsg(productItem)
+  //     this.products = data.content
+  //   })
+  // }
 
 }

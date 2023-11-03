@@ -10,9 +10,8 @@ import { ProductService } from 'src/app/service/product.service';
 export class UpCommingProductsComponent implements OnInit {
 
   products: Product[] = [];
-  currentProduct: any;
+  currentProduct!: Product;
   lastProductIndex: number = -1;
-  // imgSrc: string = '';
 
   
 
@@ -22,18 +21,16 @@ export class UpCommingProductsComponent implements OnInit {
     private el: ElementRef,
     private renderer: Renderer2) { }
 
-  ngOnInit(): void {
-    this.getComingUpProducts();
-    this.currentProduct = this.products[0];
-    
-  }
+    ngOnInit(): void {
+      this.getComingUpProducts();
+    }
 
 
   getComingUpProducts() {
     this.productService.getComingUpProducts().subscribe(data => {
       this.products = data.content;
       this.currentProduct = this.products[0];
-    })
+    });
   }
 
   @HostListener('window:scroll', ['$event'])

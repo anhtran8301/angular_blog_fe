@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CartItem } from 'src/app/models/CartItem';
 import { Product } from 'src/app/models/Product';
 import { CartService } from 'src/app/service/cart.service';
+import { MessengerService } from 'src/app/service/messenger.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class DetailsProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
+    private msg: MessengerService,
     private route: ActivatedRoute
   ) { }
 
@@ -33,9 +35,10 @@ export class DetailsProductComponent implements OnInit {
     })
   }
 
-  addToCart() {
-    const cartItem = new CartItem(this.product);
-    this.cartService.addToCart(cartItem);
+  handleAddToCart(productItem: any) {
+    this.cartService.addProductToCart(productItem).subscribe(() => {
+      this.msg.sendMsg(productItem)
+    })
   }
 
 }

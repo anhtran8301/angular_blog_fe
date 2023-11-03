@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">
       <img class="logo" src="/assets/icons/bookshop.png" alt="image" alt="">
@@ -19,18 +19,8 @@
             aria-expanded="false">
             Thể loại
           </a>
-          <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <div *ngFor="let bookCategory of listBooksCategories">
-              <li>
-                <a class="dropdown-item" routerLink="/products/categories/{{bookCategory.id}}"
-                  routerLinkActive="active-link">{{bookCategory.name}}</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-            </div>
-          </ul> -->
           <app-dropdown-menu 
+          
             [listItems]="listBooksCategories"
             routerLinkPrefix="/products/categories">
           </app-dropdown-menu>
@@ -42,6 +32,7 @@
             Tác giả
           </a>
           <app-dropdown-menu 
+          
             [listItems]="listAuthors"
             routerLinkPrefix="/products/authors">
           </app-dropdown-menu>
@@ -53,6 +44,7 @@
             Nhà xuất bản
           </a>
           <app-dropdown-menu 
+          
             [listItems]="listPublishers"
             routerLinkPrefix="/products/publishers">
           </app-dropdown-menu>
@@ -62,21 +54,21 @@
       <!-- Search Component -->
       <app-search></app-search>
 
-      <app-cart-status></app-cart-status>
+      <app-cart-status *ngIf="isLogin"></app-cart-status>
 
       <div *ngIf="!isLogin">
         <button mat-raised-button color="accent" routerLink="/login" class="m-3">
-          Login
+          Đăng nhập
         </button>
         <button mat-raised-button color="accent" routerLink="/register">
-          Register
+          Đăng ký
         </button>
       </div>
 
       <div class="dropdown mx-5" *ngIf="isLogin">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          Account
+          Tài khoản
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <div class="dropdown-item" *ngIf="isLogin">
@@ -85,7 +77,7 @@
             <a routerLink="/change-avatar"><img class="user-avatar" src="{{avatar}}"></a>
             <hr class="dropdown-divider" />
             <button (click)="logOut()" mat-raised-button color="accent" routerLink="/login">
-              Logout
+              Đăng xuất
               <mat-icon>logout</mat-icon>
             </button>
           </div>
