@@ -32,7 +32,7 @@
             Tác giả
           </a>
           <app-dropdown-menu 
-          
+            
             [listItems]="listAuthors"
             routerLinkPrefix="/products/authors">
           </app-dropdown-menu>
@@ -44,7 +44,6 @@
             Nhà xuất bản
           </a>
           <app-dropdown-menu 
-          
             [listItems]="listPublishers"
             routerLinkPrefix="/products/publishers">
           </app-dropdown-menu>
@@ -52,7 +51,7 @@
       </ul>
 
       <!-- Search Component -->
-      <app-search></app-search>
+      <app-search class="d-none d-md-block"></app-search>
 
       <app-cart-status *ngIf="isLogin"></app-cart-status>
 

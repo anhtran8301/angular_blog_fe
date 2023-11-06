@@ -115,12 +115,20 @@ body {
   --bs-link-hover-color: #0a58ca;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
+  // --bs-border-color-translucent: white !important;
 }
 
 .dropdown:hover .dropdown-menu {
   display: block;
   margin-top: 0; /* remove the gap so it doesn't close */
+  
 }
+
+.dropdown-menu{
+  position: absolute !important;
+  left: -28px !important;
+}
+
 .active-link{
   font-weight: bold;
   color: #205b8d;
@@ -156,6 +164,104 @@ body::-webkit-scrollbar-track {
   background-color: #00AB55;
   border-radius: 50px;
 }
+.add-address {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1.71429;
+  font-size: 0.875rem;
+  text-transform: none;
+  min-width: 64px;
+  padding: 6px 16px;
+  border-radius: 8px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 171, 85);
+  box-shadow: none;
+}
+
+.add-address:hover{
+  background-color: rgb(33, 109, 71);
+}
+
+.is-default{
+  height: 24px;
+  min-width: 22px;
+  line-height: 0;
+  border-radius: 6px;
+  cursor: default;
+  align-items: center;
+  white-space: nowrap;
+  display: inline-flex;
+  justify-content: center;
+  padding: 0px 8px;
+  color: rgb(0, 108, 156);
+  font-size: 0.75rem;
+  background-color: rgba(0, 184, 217, 0.16);
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+.receiver{
+  margin: 0px;
+  font-weight: 600;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.address, .phone{
+  line-height: 1.57143;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.choose-address{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1.71429;
+  text-transform: none;
+
+  min-width: 64px;
+  padding: 4px 16px;
+  border-radius: 8px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: rgb(0, 171, 85);
+  box-shadow: none;
+  height: 30px;
+  font-size: 13px;
+  max-width: 120px;
+}
+
+.choose-address:hover{
+  background-color: #ccc;
+}
+
 
 
 /* end */

@@ -11,8 +11,8 @@ export class MessengerService {
 
   constructor() { }
 
-  sendMsg(product: Product) {
-    this.subject.next(product) //Triggering an event
+  sendMsg(productId: number) {
+    this.subject.next(productId)
   }
 
   getMsg() {

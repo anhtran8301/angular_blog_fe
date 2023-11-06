@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/CartItem';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { map } from 'rxjs/operators';
 import { Product } from '../models/Product';
@@ -17,8 +17,8 @@ export class CartService {
   totalPrice: Subject<number> = new Subject<number>();
 
   totalQuantity: Subject<number> = new Subject<number>();
-  
-  
+
+
 
   constructor(private httpClient: HttpClient) { }
 
@@ -51,7 +51,7 @@ export class CartService {
   decrementQuantity(cartItem: CartItem) {
     cartItem.quantity--;
     cartItem.quantity === 0 ? this.remove(cartItem) : this.computeCartTotals();
-    
+
   }
 
   computeCartTotals() {
@@ -71,13 +71,16 @@ export class CartService {
   }
 
   remove(cartItem: CartItem) {
+
     const itemIndex = this.cartItems.findIndex(tempCartItem => tempCartItem.id == cartItem.id);
 
-    if(itemIndex > -1) {
+    if (itemIndex > -1) {
       this.cartItems.splice(itemIndex, 1);
       this.computeCartTotals();
     }
   }
+
+  
 
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
     for (let tempCartItem of this.cartItems) {
@@ -88,7 +91,7 @@ export class CartService {
 
     // console.log("totalPriceValue", totalPriceValue.toFixed(2), "totalQuantityValue", totalQuantityValue);
     // console.log("-----");
-    
+
   }
 
   getCartItems(): Observable<CartItem[]> {
@@ -103,56 +106,56 @@ export class CartService {
           for (let i in cartItems) {
             if (cartItems[i].productId === item.product.id) {
               cartItems[i].quantity++
-              console.log(i);
-              
               productExists = true
               break;
             }
           }
-
           if (!productExists) {
             cartItems.push(new CartItem(item.id, item.product, item.quantity));
           }
         }
-        console.log("cartItems: ", cartItems);
-        
+
         return cartItems;
       })
     );
   }
 
   addCart(quantity: number, productId: number): Observable<any> {
-    return this.httpClient.post<any>(this.API_CART, {quantity, productId})
+    return this.httpClient.post<any>(this.API_CART, { quantity, productId })
   }
 
   addToCart(cartItem: CartItem) {
-      
-      //check if already have the item in cart
-      let alreadyExistsInCart: boolean = false;
-      let existingCartItem: CartItem = undefined!;
-  
-      if (this.cartItems.length > 0) {
-        //find the item in the cart based on item id
-        for (let tempCartItem of this.cartItems) {
-          if (tempCartItem.id === cartItem.id) {
-            existingCartItem = tempCartItem;
-            break;
-          }
-        }
-  
-        //check if found it
-        alreadyExistsInCart = (existingCartItem != undefined);
-  
-      }
-      //add the item to the array
-      alreadyExistsInCart ? existingCartItem.quantity++ : this.cartItems.push(cartItem);
-  
-      //compute cart total price and total quantity
-      this.computeCartTotals();
-  
-    }
 
-    addProductToCart(product: Product): Observable<any> {
-      return this.httpClient.post(this.API_CART, { product });
+    //check if already have the item in cart
+    let alreadyExistsInCart: boolean = false;
+    let existingCartItem: CartItem = undefined!;
+
+    if (this.cartItems.length > 0) {
+      //find the item in the cart based on item id
+      for (let tempCartItem of this.cartItems) {
+        if (tempCartItem.id === cartItem.id) {
+          existingCartItem = tempCartItem;
+          break;
+        }
+      }
+
+      //check if found it
+      alreadyExistsInCart = (existingCartItem != undefined);
+
     }
+    //add the item to the array
+    alreadyExistsInCart ? existingCartItem.quantity++ : this.cartItems.push(cartItem);
+
+    //compute cart total price and total quantity
+    this.computeCartTotals();
+
+  }
+
+  addProductToCart(product: Product): Observable<any> {
+    return this.httpClient.post(this.API_CART, { product });
+  }
+
+  removeFromCart(productId: number): Observable<any> {
+    return this.httpClient.delete(`${this.API_CART}/${productId}`, { responseType: 'text'});
+  }
 }

@@ -27,6 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup';
 import { NgConfirmModule } from 'ng-confirm-box';
+import {MatRadioModule} from '@angular/material/radio';
 import { NgFor, AsyncPipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
@@ -66,6 +67,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ScrollTopBtnComponent } from './shared/scroll-top-btn/scroll-top-btn.component';
 import { CreateProductComponent } from './pages/admin/create-product/create-product.component';
+import { PaymentComponent } from './pages/payment/payment.component';
+import { ThankYouComponent } from './shared/thank-you/thank-you.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,6 +96,8 @@ import { CreateProductComponent } from './pages/admin/create-product/create-prod
     UpCommingProductsComponent,
     ScrollTopBtnComponent,
     CreateProductComponent,
+    PaymentComponent,
+    ThankYouComponent,
 
   ],
   imports: [
@@ -107,6 +112,7 @@ import { CreateProductComponent } from './pages/admin/create-product/create-prod
     MatInputModule,
     MatFormFieldModule,
     AngularEditorModule,
+    MatRadioModule,
     MatListModule,
     MatSortModule,
     MatButtonModule,

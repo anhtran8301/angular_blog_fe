@@ -156,7 +156,7 @@ export class NewestComponent implements OnInit {
       const cartItem = new CartItem(product.id, product, 1);
       this.cartService.addCart(cartItem.quantity, cartItem.id).subscribe(data => {
         console.log(data);
-        this.msg.sendMsg(product)
+        this.msg.sendMsg(product.id)
         this.toggleDone();
       }, errorResponse => {
         this.toast.error(errorResponse.error.message)
@@ -168,6 +168,8 @@ export class NewestComponent implements OnInit {
     }
 
   }
+
+
   updatePageSize(pageSize: string) {
     this.pageSize = Number(pageSize);
     this.pageNumber = 1;

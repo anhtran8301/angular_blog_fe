@@ -72,8 +72,6 @@ export class CartStatusComponent implements OnInit {
 
   loadCartItems() {
     this.cartService.getCartItems().subscribe(data => {
-      console.log(data);
-      
       this.cartItems = data;
       this.calcCartTotal();
     })
