@@ -1,6 +1,5 @@
-export class Product {
+export class UpdateProduct {
     constructor(
-        public id: number,
         public sku: string,
         public name: string,
         public description: string,

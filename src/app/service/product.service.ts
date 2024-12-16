@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Product } from '../models/Product';
+import { UpdateProduct } from '../models/UpdateProduct';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class ProductService {
   getProductsByBookCategory(bookCategoryId: number, pageNo: number, pageSize: number): Observable<any> {
     const pathUrl = `${this.API_PRODUCT}/categories/${bookCategoryId}?pageNo=${pageNo}&pageSize=${pageSize}`
     return this.httpClient.get<any>(pathUrl);
+  }
+
+  addProduct(product: any): Observable<any>{
+    return this.httpClient.post<any>(this.API_PRODUCT, product);
   }
 
 
@@ -64,6 +69,14 @@ export class ProductService {
 
   getComingUpProducts(): Observable<any> {
     return this.httpClient.get<any>(`${this.API_PRODUCT}/up-coming`);
+  }
+
+  updateProductById(id: number, product: UpdateProduct): Observable<any> {
+    return this.httpClient.put(`${this.API_PRODUCT}/${id}`, product)
+  }
+
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete<any>(`${this.API_PRODUCT}/${id}`)
   }
 
 }

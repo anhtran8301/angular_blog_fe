@@ -1,1 +1,92 @@
-<!-- <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor> -->
+<div class="container p-5">
+    <div class="row">
+        <div class="col-12">
+            <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+                <div>
+                    <h3 mat-dialog-title>Thêm sách mới</h3>
+                    <div class="d-flex justify-content-between">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tên sách</mat-label>
+                            <input name="name" #name="ngModel" [(ngModel)]="form.name" matInput placeholder="Tên sách"
+                                required minlength="3" maxlength="88">
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Số lượng</mat-label>
+                            <input name="quantity" #name="ngModel" [(ngModel)]="form.quantity" matInput
+                                placeholder="Đơn giá" required>
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Đơn giá</mat-label>
+                            <input name="unitPrice" #name="ngModel" [(ngModel)]="form.unitPrice" matInput
+                                placeholder="Đơn giá" required>
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Giảm giá</mat-label>
+                            <input name="discount" #name="ngModel" [(ngModel)]="form.discount" matInput
+                                placeholder="Giảm giá">
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex">
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Danh mục sách</mat-label>
+                            <input color="white" type="text" aria-label="Number" matInput [formControl]="cateControl"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="OnCateSelected($event.option)">
+                                <mat-option *ngFor="let cate of filteredOptionsCate | async" [value]="cate">
+                                    {{cate}} 
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Nhà xuất bản</mat-label>
+                            <input color="white" type="text" aria-label="Number" matInput [formControl]="pubControl"
+                                [matAutocomplete]="auto1">
+                            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="OnPubSelected($event.option)">
+                                <mat-option *ngFor="let pub of filteredOptionsPublishers | async" [value]="pub">
+                                    {{pub}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Tác giả</mat-label>
+                            <input color="white" type="text" aria-label="Number" matInput [formControl]="authorControl"
+                                [matAutocomplete]="auto2">
+                            <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="OnAuthorSelected($event.option)">
+                                <mat-option *ngFor="let author of filteredOptionsAuthors | async" [value]="author">
+                                    {{author}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Mô tả</mat-label>
+                            <textarea name="description" #description="ngModel" [(ngModel)]="form.description" matInput
+                                placeholder="Mô tả"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <app-upload-avatar (giveURLtoCreate)="onUpLoad($event)"></app-upload-avatar>
+                <div class="d-flex justify-content-between pt-3">
+                    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Hoàn tất</button>
+                    <button mat-raised-button color="primary" class="mat-button-toggle-group btn-outline-primary">Thêm
+                        <mat-icon color="accent" matSuffix>add_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

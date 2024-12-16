@@ -61,6 +61,7 @@ import { UpCommingProductsComponent } from './pages/products/up-comming-products
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -69,6 +70,7 @@ import { ScrollTopBtnComponent } from './shared/scroll-top-btn/scroll-top-btn.co
 import { CreateProductComponent } from './pages/admin/create-product/create-product.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { ThankYouComponent } from './shared/thank-you/thank-you.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +99,7 @@ import { ThankYouComponent } from './shared/thank-you/thank-you.component';
     ScrollTopBtnComponent,
     CreateProductComponent,
     PaymentComponent,
-    ThankYouComponent,
+    ThankYouComponent
 
   ],
   imports: [
@@ -109,6 +111,7 @@ import { ThankYouComponent } from './shared/thank-you/thank-you.component';
     MatDividerModule,
     MatIconModule,
     MatSelectModule,
+    MatExpansionModule,
     MatInputModule,
     MatFormFieldModule,
     AngularEditorModule,

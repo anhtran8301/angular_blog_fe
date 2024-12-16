@@ -1,103 +1,105 @@
-<div>
-    <div class="container mt-3 ">
-        <div class="row">
-            <div class="col-md-10">
-                <p style="font-size: 1.25rem; font-weight: bold;">Trang chủ</p>
-                <p>Danh sách sản phẩm</p>
-            </div>
-            <div class="col-md-2 text-right" style="max-width: fit-content;">
-                <button type="button" class="btn btn-add" style="margin: 0;">+ Thêm mới</button>
-            </div>
+<div class="container mt-3 ">
+  <mat-tab-group>
+    <mat-tab label="Sản phẩm">
+      <div class="row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2 text-right" style="max-width: fit-content;">
+          <button (click)="openDialog()" mat-raised-button type="button" class="btn btn-add" style="margin: 0;">+ Thêm
+            mới</button>
+        </div>
+      </div>
+
+      <div class="border border-radius rounded mt-3">
+        <div class="row mx-1">
+
+          <div class="col-md-3 mt-2 ">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Trạng thái</mat-label>
+              <input color="white" type="text" aria-label="Number" matInput [formControl]="myControl"
+                [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+          </div>
+          <div class="col-md-9 mt-2">
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Tìm kiếm</mat-label>
+              <input matInput value="" (keyup)="filter($event)">
+            </mat-form-field>
+          </div>
         </div>
 
-    </div>
-    <div class="container">
+        <div class="mat-elevation-z8">
+          <table mat-table matSort (matSortChange)="announceSortChange($event)" [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+              <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
 
+            <ng-container matColumnDef="imagesString">
+              <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header></th>
+              <td mat-cell *matCellDef="let element"><img class="prod-img" src="{{element.imagesString}}" alt=""></td>
+            </ng-container>
 
+            <ng-container matColumnDef="name">
+              <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Tên sản phẩm </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="prod-name">{{element.name}}</p>
+              </td>
+            </ng-container>
 
-        <div class="border border-radius rounded mt-3">
-            <div class="row mx-1">
+            <ng-container matColumnDef="quantity">
+              <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Số lượng </th>
+              <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+            </ng-container>
 
-                <div class="col-md-3 mt-2 ">
+            <ng-container matColumnDef="sold">
+              <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Đã bán </th>
+              <td mat-cell *matCellDef="let element"> {{element.sold}} </td>
+            </ng-container>
 
-                        <mat-form-field class="w-100" appearance="outline">
-                            <mat-label>Trạng thái</mat-label>
-                            <input color="white" type="text" aria-label="Number" matInput [formControl]="myControl"
-                                [matAutocomplete]="auto">
-                            <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{option}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
+            <ng-container matColumnDef="discount">
+              <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
+              <td mat-cell *matCellDef="let element">
+                <p class="prod-discount">Giảm giá ({{element.discount}})%</p>
+              </td>
+            </ng-container>
 
-                </div>
-                <div class="col-md-9 mt-2">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Tìm kiếm</mat-label>
-                        <input matInput value="" (keyup)="filter($event)">
-                    </mat-form-field>
-                </div>
-            </div>
+            <ng-container matColumnDef="unitPrice">
+              <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Đơn giá </th>
+              <td mat-cell *matCellDef="let element"> {{element.unitPrice}} </td>
+            </ng-container>
 
-            <div class="mat-elevation-z8">
-                <table mat-table matSort (matSortChange)="announceSortChange($event)" [dataSource]="dataSource">
-              
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="id">
-                    <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
-                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                  </ng-container>
-              
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="imagesString">
-                    <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header></th>
-                    <td mat-cell *matCellDef="let element"><img class="prod-img" src="{{element.imagesString}}" alt=""></td>
-                  </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="openEditForm(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteEmployee(element.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
-                  <ng-container matColumnDef="name">
-                    <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Tên sản phẩm </th>
-                    <td mat-cell *matCellDef="let element"><p class="prod-name">{{element.name}}</p></td>
-                  </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
 
-                  <!-- Weight Column -->
-                  <ng-container matColumnDef="quantity">
-                    <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Số lượng </th>
-                    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-                  </ng-container>
-              
-                  <!-- Symbol Column -->
-                  <ng-container matColumnDef="sold">
-                    <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Đã bán </th>
-                    <td mat-cell *matCellDef="let element"> {{element.sold}} </td>
-                  </ng-container>
-
-                   <!-- Symbol Column -->
-                   <ng-container matColumnDef="discount">
-                    <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Trạng thái </th>
-                    <td mat-cell *matCellDef="let element"><p class="prod-discount">Giảm giá ({{element.discount}})%</p></td>
-                  </ng-container>
-
-                   <!-- Symbol Column -->
-                   <ng-container matColumnDef="unitPrice">
-                    <th class="prod-header" mat-header-cell *matHeaderCellDef mat-sort-header> Đơn giá </th>
-                    <td mat-cell *matCellDef="let element"> {{element.unitPrice}} </td>
-                  </ng-container>
-              
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-              
-                <mat-paginator [pageSizeOptions]="[10, 15, 20]"
-                               showFirstLastButtons
-                               aria-label="Select page of periodic elements">
-                </mat-paginator>
-              </div>
-              
-
-
-
+          <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+          </mat-paginator>
         </div>
-    </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Đơn hàng">Đơn hàng</mat-tab>
+    <mat-tab label="Thông tin khác">Thông tin khác</mat-tab>
+  </mat-tab-group>
 
 </div>

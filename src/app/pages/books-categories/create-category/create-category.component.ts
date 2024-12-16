@@ -29,14 +29,16 @@ export class CreateCategoryComponent {
       this.form.image
     )
     if (this.form.image == undefined) {
-      this.toast.error("The image value can not blank")
+      this.toast.error("Chưa có hình ảnh")
     } else {
       this.bookCategoryService.create(this.bookCategory).subscribe(
         {
-          next: () => this.toast.success("Created Successfully"),
+          next: () => this.toast.success("Thêm thành công"),
           error: (errorResponse) => this.toast.error(errorResponse.error.message)
         });
     }
+
+    
 
     //-- The old way --
     

@@ -9,6 +9,9 @@ import { TokenService } from 'src/app/service/token.service';
 import { ProductService } from 'src/app/service/product.service';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { CreateProductComponent } from './create-product/create-product.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,16 +23,20 @@ export class AdminComponent implements OnInit {
   listProducts: Product[] = [];
   dataSource: any;
   isAdmin = false;
+  panelOpenState = false;
 
   myControl = new FormControl('');
-  displayedColumns: string[] = ['id', 'imagesString', 'name', 'quantity', 'sold', 'discount', 'unitPrice'];
+  displayedColumns: string[] = ['id', 'imagesString', 'name', 'quantity', 'sold', 'discount', 'unitPrice', 'action'];
 
   options: string[] = ['Flash sale', 'Đang giảm giá', 'Hết hàng', 'Sắp hết hàng', 'Ngừng kinh doanh'];
 
   constructor(
+    public dialog: MatDialog,
     private tokenService: TokenService,
     private productService: ProductService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private toast: ToastrService,
+    
   ) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -55,15 +62,18 @@ export class AdminComponent implements OnInit {
       });
 
     }
-    this.productService.getAllProducts().subscribe(data => {
-      this.reload(data.content);
-
-    })
+    this.getProducts();
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
+  }
+
+  getProducts() {
+    this.productService.getAllProducts().subscribe(data => {
+      this.reload(data.content);
+    })
   }
 
   private _filter(value: string): string[] {
@@ -86,6 +96,42 @@ export class AdminComponent implements OnInit {
 
   filter(e: any) {
     this.dataSource.filter = e.target.value;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(CreateProductComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true || result == undefined) {
+        this.productService.getAllProducts().subscribe(data => {
+          this.reload(data.content);
+        })
+      }
+    });
+  }
+
+  openEditForm(data: any) {
+    const dialogRef = this.dialog.open(CreateProductComponent, {
+      data,
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getProducts();
+        }
+      },
+    });
+  }
+
+  deleteEmployee(id: number) {
+    this.productService.delete(id).subscribe({
+      next: (res) => {
+        this.toast.success("Xóa thành công");
+        this.getProducts();
+      },
+      error: console.log,
+    });
   }
 
   // updateAllComplete() {
